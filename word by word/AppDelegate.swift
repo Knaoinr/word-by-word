@@ -9,19 +9,34 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+    
+    // MARK: - Objects
 
-    @IBOutlet weak var window: NSWindow!
+    static var mainWindow: NSWindow?
+    let mainViewController = HomeViewController()
 
+    // MARK: - Protocol
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        
+        //Start window
+        let window = NSWindow(contentRect: NSRect(x: 200, y: 200, width: 800, height: 600), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: NSWindow.BackingStoreType.buffered, defer: false)
+        window.orderFrontRegardless()
+        AppDelegate.mainWindow = window
+        AppDelegate.mainWindow?.delegate = self
+        AppDelegate.mainWindow?.contentViewController = mainViewController
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
-
+    
+    func windowWillResize(_ sender: NSWindow, to frameSize: NSSize) -> NSSize {
+        mainViewController.reposition(size: frameSize)
+        return frameSize
+    }
 
 }
 
