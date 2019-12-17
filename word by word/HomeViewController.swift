@@ -21,18 +21,25 @@ class HomeViewController: NSViewController {
     
     let homeSearchButton = NSButton()
     let homeSearchImage = NSImageView()
+    let homeSearchLabel = NSTextField(string: "Search")
     let homeBrowseButton = NSButton()
     let homeBrowseImage = NSImageView()
+    let homeBrowseLabel = NSTextField(string: "Browse")
     let homeAddButton = NSButton()
     let homeAddImage = NSImageView()
+    let homeAddLabel = NSTextField(string: "Add")
     
     let cellSearch = NSView()
     let cellBrowse = NSView()
     let cellAdd = NSView()
     let homeStack = NSStackView()
     
+    let homeButton = NSButton()
+    
     var contentHeight:CGFloat = 0
     var previousSize:CGFloat = 0
+    
+    let peach = NSColor(calibratedRed: 1, green: 0.3, blue: 0.3, alpha: 1)
         
     // MARK: - Protocol
     
@@ -52,6 +59,9 @@ class HomeViewController: NSViewController {
         createObjects()
         }
     
+    // MARK: - Action response methods
+    
+    
     // MARK: - Homemade functions
     
     // Place all objects & their properties
@@ -66,20 +76,40 @@ class HomeViewController: NSViewController {
             colorView.changeGradientColor(start: .black, end: .blue)
             homePlayImage.image = NSImage(named: "play_purple")
             homeSearchImage.image = NSImage(named: "search_purple")
-            homeBrowseImage.image = NSImage(named: "search_purple")
-            homeAddImage.image = NSImage(named: "search_purple")
+            homeBrowseImage.image = NSImage(named: "browse_purple")
+            homeAddImage.image = NSImage(named: "add_purple")
+            homeSearchLabel.textColor = .black
+            homeBrowseLabel.textColor = .black
+            homeAddLabel.textColor = .black
+            homeSearchLabel.backgroundColor = NSColor(calibratedWhite: 1, alpha: 0.2)
+            homeBrowseLabel.backgroundColor = homeSearchLabel.backgroundColor!
+            homeAddLabel.backgroundColor = homeSearchLabel.backgroundColor!
         } else if hour >= 9 && hour < 17 { //day
             colorView.changeGradientColor(start: .orange, end: .white)
             homePlayImage.image = NSImage(named: "play_orange")
             homeSearchImage.image = NSImage(named: "search_orange")
-            homeBrowseImage.image = NSImage(named: "search_purple")
-            homeAddImage.image = NSImage(named: "search_purple")
+            homeBrowseImage.image = NSImage(named: "browse_orange")
+            homeAddImage.image = NSImage(named: "add_orange")
+            homeSearchLabel.textColor = peach
+            homeBrowseLabel.textColor = peach
+            homeAddLabel.textColor = peach
+            homeSearchLabel.backgroundColor = .clear
+            homeBrowseLabel.backgroundColor = homeSearchLabel.backgroundColor!
+            homeAddLabel.backgroundColor = homeSearchLabel.backgroundColor!
+
         } else { //dawn/dusk
             colorView.changeGradientColor(start: .black, end: .purple)
             homePlayImage.image = NSImage(named: "play_purple")
             homeSearchImage.image = NSImage(named: "search_purple")
-            homeBrowseImage.image = NSImage(named: "search_purple")
-            homeAddImage.image = NSImage(named: "search_purple")
+            homeBrowseImage.image = NSImage(named: "browse_purple")
+            homeAddImage.image = NSImage(named: "add_purple")
+            homeSearchLabel.textColor = .black
+            homeBrowseLabel.textColor = .black
+            homeAddLabel.textColor = .black
+            homeSearchLabel.backgroundColor = NSColor(calibratedWhite: 1, alpha: 0.2)
+            homeBrowseLabel.backgroundColor = homeSearchLabel.backgroundColor!
+            homeAddLabel.backgroundColor = homeSearchLabel.backgroundColor!
+
         }
         
         //Setup main play button image
@@ -89,49 +119,81 @@ class HomeViewController: NSViewController {
         homePlayButton.isTransparent = true
         
         //Setup main search button image
-        homeSearchImage.frame = NSRect(x: 0, y: 0, width: 100, height: 100)
-        homeSearchButton.frame = homeSearchImage.frame
+        homeSearchImage.frame = NSRect(x: 0, y: 40, width: 100, height: 100)
+        homeSearchButton.frame = NSRect(x: 0, y: 0, width: 100, height: 145)
         homeSearchButton.isTransparent = true
         
+        homeSearchLabel.frame = NSRect(x: 0, y: 0, width: 100, height: 25)
+        homeSearchLabel.isEditable = false
+        homeSearchLabel.isSelectable = false
+        homeSearchLabel.isBordered = false
+        homeSearchLabel.font = .messageFont(ofSize: 20)
+        homeSearchLabel.alignment = .center
+        
         cellSearch.addSubview(homeSearchImage)
+        cellSearch.addSubview(homeSearchLabel)
         cellSearch.addSubview(homeSearchButton)
         
         //Setup main browse button image
         homeBrowseImage.frame = homeSearchImage.frame
-        homeBrowseButton.frame = homeBrowseImage.frame
+        homeBrowseButton.frame = homeSearchButton.frame
         homeBrowseButton.isTransparent = true
         
+        homeBrowseLabel.frame = homeSearchLabel.frame
+        homeBrowseLabel.isEditable = false
+        homeBrowseLabel.isSelectable = false
+        homeBrowseLabel.isBordered = false
+        homeBrowseLabel.font = .messageFont(ofSize: 20)
+        homeBrowseLabel.alignment = .center
+        
         cellBrowse.addSubview(homeBrowseImage)
+        cellBrowse.addSubview(homeBrowseLabel)
         cellBrowse.addSubview(homeBrowseButton)
         
         //Setup main add button image
         homeAddImage.frame = homeSearchImage.frame
-        homeAddButton.frame = homeAddImage.frame
+        homeAddButton.frame = homeSearchButton.frame
         homeAddButton.isTransparent = true
         
+        homeAddLabel.frame = homeSearchLabel.frame
+        homeAddLabel.isEditable = false
+        homeAddLabel.isSelectable = false
+        homeAddLabel.isBordered = false
+        homeAddLabel.font = .messageFont(ofSize: 20)
+        homeAddLabel.alignment = .center
+        
         cellAdd.addSubview(homeAddImage)
+        cellAdd.addSubview(homeAddLabel)
         cellAdd.addSubview(homeAddButton)
         
         //Setup stack view
         homeStack.spacing = 80
-        homeStack.frame = NSRect(x: view.bounds.width/2 - 150 - homeStack.spacing, y: view.bounds.height - 100 - homePlayImage.bounds.height - 150, width: 300 + 2*homeStack.spacing, height: 100)
+        homeStack.frame = NSRect(x: view.bounds.width/2 - 150 - homeStack.spacing, y: view.bounds.height - 100 - homePlayImage.bounds.height - 30 - homeSearchButton.bounds.height, width: 300 + 2*homeStack.spacing, height: 145)
         homeStack.orientation = .horizontal
         homeStack.distribution = .fillEqually
         homeStack.addArrangedSubview(cellSearch)
         homeStack.addArrangedSubview(cellBrowse)
         homeStack.addArrangedSubview(cellAdd)
-        contentHeight += 150 + homeStack.bounds.height
+        contentHeight += 30 + homeStack.bounds.height + 30
 
         //Setup scroll view
         scrollView.drawsBackground = false
         scrollView.verticalScrollElasticity = .none
         scrollView.documentView = NSView(frame: NSRect(x: 0, y: 0, width: view.bounds.width, height: max(contentHeight, view.bounds.height)))
         scrollView.contentView.scroll(to: NSPoint(x: 0, y: scrollView.documentView!.bounds.height - view.bounds.height))
+        
+        //Setup home button
+        homeButton.frame = NSRect(x: view.bounds.width - 30, y: view.bounds.height - 30, width: 30, height: 30)
+        homeButton.image = NSImage(named: NSImage.homeTemplateName)
+        homeButton.isBordered = false
 
         //Add all to scrollView
         scrollView.documentView!.addSubview(homePlayImage)
         scrollView.documentView!.addSubview(homePlayButton)
         scrollView.documentView!.addSubview(homeStack)
+        
+        //Add outside of scrollView
+        colorView.addSubview(homeButton)
         
         previousSize = view.bounds.height
     }
@@ -151,7 +213,7 @@ class HomeViewController: NSViewController {
         //change objects
         homePlayImage.setFrameOrigin(NSPoint(x: size.width/2 - 200/2, y: max(contentHeight, size.height) - homePlayImage.bounds.height - 100))
         homePlayButton.setFrameOrigin(homePlayImage.frame.origin)
-        homeStack.setFrameOrigin(NSPoint(x: size.width/2 - 150 - homeStack.spacing, y: max(contentHeight, size.height) - 100 - homePlayImage.bounds.height - 150))
+        homeStack.setFrameOrigin(NSPoint(x: size.width/2 - 150 - homeStack.spacing, y: max(contentHeight, size.height) - 100 - homePlayImage.bounds.height - 30 - homeSearchButton.bounds.height))
         
         previousSize = size.height
     }
