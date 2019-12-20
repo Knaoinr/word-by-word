@@ -14,7 +14,6 @@ class HomeViewController: NSViewController {
     // MARK: - Objects
     
     let scrollView = NSScrollView()
-    let colorView = ColorView()
     
     let homePlayButton = NSButton()
     let homePlayImage = NSImageView()
@@ -36,19 +35,20 @@ class HomeViewController: NSViewController {
     
     let homeButton = NSButton()
     
+    let sideBarController = SideBarViewController()
+    let sideBarButton  = NSButton()
+    
     var contentHeight:CGFloat = 0
-    var previousSize:CGFloat = 0
+    var previousHeight:CGFloat = 0
     
     let peach = NSColor(calibratedRed: 1, green: 0.3, blue: 0.3, alpha: 1)
         
     // MARK: - Protocol
     
     override func loadView() {
-        self.view = NSView(frame: NSRect(x: 0, y: 0, width: AppDelegate.mainWindow!.frame.width, height: AppDelegate.mainWindow!.frame.height))
-        self.colorView.frame = view.frame
+        self.view = ColorView(frame: NSRect(x: 0, y: 0, width: AppDelegate.mainWindow!.frame.width, height: AppDelegate.mainWindow!.frame.height))
         self.scrollView.frame = view.frame
-        view.addSubview(colorView)
-        colorView.addSubview(scrollView)
+        self.view.addSubview(scrollView)
     }
     
     override func viewDidLoad() {
@@ -57,10 +57,13 @@ class HomeViewController: NSViewController {
 
         // Create all objects
         createObjects()
-        }
+    }
     
     // MARK: - Action response methods
     
+    @objc func onSideBarButtonPress() {
+        view.addSubview(sideBarController.view)
+    }
     
     // MARK: - Homemade functions
     
@@ -71,9 +74,9 @@ class HomeViewController: NSViewController {
         let date = Date()
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
-        
+                
         if hour >= 21 || hour < 5 { //night
-            colorView.changeGradientColor(start: .black, end: .blue)
+            (self.view as! ColorView).changeGradientColor(start: .black, end: .blue)
             homePlayImage.image = NSImage(named: "play_purple")
             homeSearchImage.image = NSImage(named: "search_purple")
             homeBrowseImage.image = NSImage(named: "browse_purple")
@@ -85,7 +88,7 @@ class HomeViewController: NSViewController {
             homeBrowseLabel.backgroundColor = homeSearchLabel.backgroundColor!
             homeAddLabel.backgroundColor = homeSearchLabel.backgroundColor!
         } else if hour >= 9 && hour < 17 { //day
-            colorView.changeGradientColor(start: .orange, end: .white)
+            (self.view as! ColorView).changeGradientColor(start: .orange, end: .white)
             homePlayImage.image = NSImage(named: "play_orange")
             homeSearchImage.image = NSImage(named: "search_orange")
             homeBrowseImage.image = NSImage(named: "browse_orange")
@@ -96,9 +99,8 @@ class HomeViewController: NSViewController {
             homeSearchLabel.backgroundColor = .clear
             homeBrowseLabel.backgroundColor = homeSearchLabel.backgroundColor!
             homeAddLabel.backgroundColor = homeSearchLabel.backgroundColor!
-
         } else { //dawn/dusk
-            colorView.changeGradientColor(start: .black, end: .purple)
+            (self.view as! ColorView).changeGradientColor(start: .systemIndigo, end: .systemOrange)
             homePlayImage.image = NSImage(named: "play_purple")
             homeSearchImage.image = NSImage(named: "search_purple")
             homeBrowseImage.image = NSImage(named: "browse_purple")
@@ -106,14 +108,13 @@ class HomeViewController: NSViewController {
             homeSearchLabel.textColor = .black
             homeBrowseLabel.textColor = .black
             homeAddLabel.textColor = .black
-            homeSearchLabel.backgroundColor = NSColor(calibratedWhite: 1, alpha: 0.2)
+            homeSearchLabel.backgroundColor = .clear
             homeBrowseLabel.backgroundColor = homeSearchLabel.backgroundColor!
             homeAddLabel.backgroundColor = homeSearchLabel.backgroundColor!
-
         }
         
         //Setup main play button image
-        homePlayImage.frame = NSRect(x: view.bounds.width/2 - 200/2, y: view.bounds.height - 200 - 100, width: 200, height: 200)
+        homePlayImage.frame = NSRect(x: view.bounds.width/2 - 200/2, y: view.bounds.height - 200 - 100 - 20, width: 200, height: 200)
         contentHeight += 100 + homePlayImage.bounds.height
         homePlayButton.frame = homePlayImage.frame
         homePlayButton.isTransparent = true
@@ -168,7 +169,7 @@ class HomeViewController: NSViewController {
         
         //Setup stack view
         homeStack.spacing = 80
-        homeStack.frame = NSRect(x: view.bounds.width/2 - 150 - homeStack.spacing, y: view.bounds.height - 100 - homePlayImage.bounds.height - 30 - homeSearchButton.bounds.height, width: 300 + 2*homeStack.spacing, height: 145)
+        homeStack.frame = NSRect(x: view.bounds.width/2 - 150 - homeStack.spacing, y: view.bounds.height - 100 - homePlayImage.bounds.height - 30 - homeSearchButton.bounds.height - 20, width: 300 + 2*homeStack.spacing, height: 145)
         homeStack.orientation = .horizontal
         homeStack.distribution = .fillEqually
         homeStack.addArrangedSubview(cellSearch)
@@ -183,9 +184,15 @@ class HomeViewController: NSViewController {
         scrollView.contentView.scroll(to: NSPoint(x: 0, y: scrollView.documentView!.bounds.height - view.bounds.height))
         
         //Setup home button
-        homeButton.frame = NSRect(x: view.bounds.width - 30, y: view.bounds.height - 30, width: 30, height: 30)
+        homeButton.frame = NSRect(x: view.bounds.width - 30, y: view.bounds.height - 30 - 20, width: 30, height: 30)
         homeButton.image = NSImage(named: NSImage.homeTemplateName)
         homeButton.isBordered = false
+        
+        //Setup side bar button
+        sideBarButton.frame = NSRect(x: 0, y: view.bounds.height - 30 - 20, width: 30, height: 30)
+        sideBarButton.image = NSImage(named: NSImage.rightFacingTriangleTemplateName)
+        sideBarButton.isBordered = false
+        sideBarButton.action = #selector(onSideBarButtonPress)
 
         //Add all to scrollView
         scrollView.documentView!.addSubview(homePlayImage)
@@ -193,29 +200,36 @@ class HomeViewController: NSViewController {
         scrollView.documentView!.addSubview(homeStack)
         
         //Add outside of scrollView
-        colorView.addSubview(homeButton)
+        view.addSubview(homeButton)
+        view.addSubview(sideBarButton)
         
-        previousSize = view.bounds.height
+        previousHeight = view.bounds.height
     }
     
     // Replace objects when frame changes
     func reposition(size: NSSize) {
         //change frames
-        colorView.setFrameSize(size)
+        view.setFrameSize(size)
         scrollView.setFrameSize(size)
         scrollView.documentView!.setFrameSize(NSSize(width: size.width, height: max(contentHeight, size.height)))
-        if size.height < previousSize { //decreasing
-            scrollView.contentView.scroll(to: NSPoint(x: 0, y: scrollView.documentView!.bounds.height - size.height))
-        } else if size.height > previousSize { //increasing
+        if contentHeight > size.height { //no extra room beneath, scrolling
+            scrollView.contentView.scroll(to: NSPoint(x: 0, y: scrollView.documentVisibleRect.minY + (previousHeight - size.height)))
+        } else { //extra room beneath (or just right), no scrolling
             scrollView.contentView.scroll(to: NSPoint(x: 0, y: scrollView.documentVisibleRect.maxY - size.height))
         }
-
-        //change objects
-        homePlayImage.setFrameOrigin(NSPoint(x: size.width/2 - 200/2, y: max(contentHeight, size.height) - homePlayImage.bounds.height - 100))
-        homePlayButton.setFrameOrigin(homePlayImage.frame.origin)
-        homeStack.setFrameOrigin(NSPoint(x: size.width/2 - 150 - homeStack.spacing, y: max(contentHeight, size.height) - 100 - homePlayImage.bounds.height - 30 - homeSearchButton.bounds.height))
         
-        previousSize = size.height
+        //change objects
+        // -20 y for each for bar at top
+        homePlayImage.setFrameOrigin(NSPoint(x: size.width/2 - 200/2, y: max(contentHeight, size.height) - homePlayImage.bounds.height - 100 - 20))
+        homePlayButton.setFrameOrigin(homePlayImage.frame.origin)
+        homeStack.setFrameOrigin(NSPoint(x: size.width/2 - 150 - homeStack.spacing, y: max(contentHeight, size.height) - 100 - homePlayImage.bounds.height - 30 - homeSearchButton.bounds.height - 20))
+        homeButton.setFrameOrigin(NSPoint(x: size.width - homeButton.bounds.width, y: size.height - homeButton.bounds.width - 20))
+        sideBarButton.setFrameOrigin(NSPoint(x: 0, y: size.height - sideBarButton.bounds.width - 20))
+        
+        sideBarController.reposition(size: size)
+        
+        
+        previousHeight = size.height
     }
     
 }

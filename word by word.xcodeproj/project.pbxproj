@@ -12,6 +12,8 @@
 		82762EA023A1A32D001C985B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82762E9E23A1A32D001C985B /* MainMenu.xib */; };
 		82762EAD23A1A742001C985B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82762EAC23A1A742001C985B /* HomeViewController.swift */; };
 		8288963D23A5CC44002EFCD3 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8288963C23A5CC44002EFCD3 /* ColorView.swift */; };
+		829807CF23AC0AFA00C66E4D /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829807CE23AC0AFA00C66E4D /* SideBarViewController.swift */; };
+		829807D123AD1B9B00C66E4D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829807D023AD1B9B00C66E4D /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		82762EA223A1A32D001C985B /* word_by_word.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = word_by_word.entitlements; sourceTree = "<group>"; };
 		82762EAC23A1A742001C985B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8288963C23A5CC44002EFCD3 /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		829807CE23AC0AFA00C66E4D /* SideBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
+		829807D023AD1B9B00C66E4D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +61,9 @@
 			children = (
 				82762E9A23A1A31E001C985B /* AppDelegate.swift */,
 				82762EAC23A1A742001C985B /* HomeViewController.swift */,
+				829807CE23AC0AFA00C66E4D /* SideBarViewController.swift */,
 				8288963C23A5CC44002EFCD3 /* ColorView.swift */,
+				829807D023AD1B9B00C66E4D /* Extensions.swift */,
 				82762E9C23A1A32C001C985B /* Assets.xcassets */,
 				82762E9E23A1A32D001C985B /* MainMenu.xib */,
 				82762EA123A1A32D001C985B /* Info.plist */,
@@ -136,9 +142,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				829807D123AD1B9B00C66E4D /* Extensions.swift in Sources */,
 				8288963D23A5CC44002EFCD3 /* ColorView.swift in Sources */,
 				82762E9B23A1A31E001C985B /* AppDelegate.swift in Sources */,
 				82762EAD23A1A742001C985B /* HomeViewController.swift in Sources */,
+				829807CF23AC0AFA00C66E4D /* SideBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

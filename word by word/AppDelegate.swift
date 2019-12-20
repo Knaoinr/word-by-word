@@ -25,8 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         let window = NSWindow(contentRect: NSRect(x: 200, y: 200, width: 800, height: 600), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: NSWindow.BackingStoreType.buffered, defer: false)
         window.orderFrontRegardless()
         AppDelegate.mainWindow = window
-        AppDelegate.mainWindow?.delegate = self
-        AppDelegate.mainWindow?.contentViewController = mainViewController
+        AppDelegate.mainWindow!.delegate = self
+        AppDelegate.mainWindow!.isOpaque = false
+        AppDelegate.mainWindow!.contentViewController = mainViewController
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -12,13 +12,12 @@ class ColorView: NSView {
     
     // MARK: - Objects
     
-    var startColor = NSColor.black
-    var endColor = NSColor.purple
+    var startColor = NSColor.clear
+    var endColor = NSColor.clear
 
     // MARK: - Draw
     
     override func draw(_ dirtyRect:NSRect) {
-        super.draw(dirtyRect)
         if let gradient = NSGradient(starting: startColor, ending: endColor) {
             gradient.draw(in: dirtyRect, angle: 270)
         }
