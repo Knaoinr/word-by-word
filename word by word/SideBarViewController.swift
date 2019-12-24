@@ -16,6 +16,7 @@ class SideBarViewController: NSViewController {
     
     let sideBarButton = NSButton()
     let queueLabel = NSTextField(string: "Queue")
+    let dividingLine = ColorView()
 
     // MARK: - Protocol
     
@@ -50,13 +51,18 @@ class SideBarViewController: NSViewController {
 
         let blackTranslucent = NSColor(calibratedRed: 0, green: 0, blue: 0.1, alpha: 0.5)
         let greyTranslucent = NSColor(calibratedRed: 0.7, green: 0.8, blue: 0.6, alpha: 0.4)
+        
+        //Setup dividing line
+        dividingLine.frame = NSRect(x: 10, y: view.bounds.height - sideBarButton.bounds.height - 30, width: 100, height: 2)
 
         if hour >= 21 || hour < 5 { //night -> light
             (self.view as! ColorView).changeGradientColor(start: greyTranslucent, end: greyTranslucent)
             queueLabel.textColor = .black
+            dividingLine.changeGradientColor(start: .black, end: .black)
         } else { //day, dawn/dusk -> dark
             (self.view as! ColorView).changeGradientColor(start: blackTranslucent, end: blackTranslucent)
             queueLabel.textColor = .lightGray
+            dividingLine.changeGradientColor(start: .lightGray, end: .lightGray)
         }
         
         //Setup side bar button
@@ -77,6 +83,7 @@ class SideBarViewController: NSViewController {
         
         view.addSubview(sideBarButton)
         view.addSubview(queueLabel)
+        view.addSubview(dividingLine)
     }
     
     func reposition(size: NSSize) {

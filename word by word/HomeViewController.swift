@@ -38,6 +38,8 @@ class HomeViewController: NSViewController {
     let sideBarController = SideBarViewController()
     let sideBarButton  = NSButton()
     
+    var addWindowArray = Array<AddWindowController>()
+    
     var contentHeight:CGFloat = 0
     var previousHeight:CGFloat = 0
     
@@ -60,6 +62,24 @@ class HomeViewController: NSViewController {
     }
     
     // MARK: - Action response methods
+    
+    @objc func onMainPlayButtonPress() {
+        //
+    }
+    
+    @objc func onSearchButtonPress() {
+        //
+    }
+    
+    @objc func onBrowseButtonPress() {
+        //
+    }
+    
+    @objc func onAddButtonPress() {
+        let addWindowController = AddWindowController(windowNibName: "AddWindowController")
+        addWindowArray.append(addWindowController)
+        addWindowController.window?.makeKeyAndOrderFront(self)
+    }
     
     @objc func onSideBarButtonPress() {
         view.addSubview(sideBarController.view)
@@ -118,11 +138,13 @@ class HomeViewController: NSViewController {
         contentHeight += 100 + homePlayImage.bounds.height
         homePlayButton.frame = homePlayImage.frame
         homePlayButton.isTransparent = true
+        homePlayButton.action = #selector(onMainPlayButtonPress)
         
         //Setup main search button image
         homeSearchImage.frame = NSRect(x: 0, y: 40, width: 100, height: 100)
         homeSearchButton.frame = NSRect(x: 0, y: 0, width: 100, height: 145)
         homeSearchButton.isTransparent = true
+        homeSearchButton.action = #selector(onSearchButtonPress)
         
         homeSearchLabel.frame = NSRect(x: 0, y: 0, width: 100, height: 25)
         homeSearchLabel.isEditable = false
@@ -139,6 +161,7 @@ class HomeViewController: NSViewController {
         homeBrowseImage.frame = homeSearchImage.frame
         homeBrowseButton.frame = homeSearchButton.frame
         homeBrowseButton.isTransparent = true
+        homeBrowseButton.action = #selector(onBrowseButtonPress)
         
         homeBrowseLabel.frame = homeSearchLabel.frame
         homeBrowseLabel.isEditable = false
@@ -155,6 +178,7 @@ class HomeViewController: NSViewController {
         homeAddImage.frame = homeSearchImage.frame
         homeAddButton.frame = homeSearchButton.frame
         homeAddButton.isTransparent = true
+        homeAddButton.action = #selector(onAddButtonPress)
         
         homeAddLabel.frame = homeSearchLabel.frame
         homeAddLabel.isEditable = false
