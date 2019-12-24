@@ -9,13 +9,24 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
-    @IBOutlet weak var window: NSWindow!
+    // MARK: - Objects
+    
+    static var mainWindow: NSWindow?
+    let mainWindowController = HomeWindowController()
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        
+        //Start window
+        let window = NSWindow(contentRect: NSRect(x: 200, y: 200, width: 800, height: 600), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: NSWindow.BackingStoreType.buffered, defer: false)
+        window.orderFrontRegardless()
+        AppDelegate.mainWindow = window
+        AppDelegate.mainWindow!.delegate = self
+        AppDelegate.mainWindow!.isOpaque = false
+        AppDelegate.mainWindow!.windowController = mainWindowController
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

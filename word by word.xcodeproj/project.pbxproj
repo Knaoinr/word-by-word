@@ -10,6 +10,12 @@
 		8201506223B2D07D00E9FCD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201506123B2D07D00E9FCD2 /* AppDelegate.swift */; };
 		8201506423B2D08800E9FCD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8201506323B2D08800E9FCD2 /* Assets.xcassets */; };
 		8201506723B2D08800E9FCD2 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8201506523B2D08800E9FCD2 /* MainMenu.xib */; };
+		8201507323B2D21D00E9FCD2 /* SideBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201506F23B2D21C00E9FCD2 /* SideBarViewController.swift */; };
+		8201507423B2D21D00E9FCD2 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201507023B2D21C00E9FCD2 /* ColorView.swift */; };
+		8201507523B2D21D00E9FCD2 /* AddWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201507123B2D21C00E9FCD2 /* AddWindowController.swift */; };
+		8201507623B2D21D00E9FCD2 /* AddWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8201507223B2D21D00E9FCD2 /* AddWindowController.xib */; };
+		8201507923B2D4AE00E9FCD2 /* HomeWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201507723B2D4AE00E9FCD2 /* HomeWindowController.swift */; };
+		8201507A23B2D4AE00E9FCD2 /* HomeWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8201507823B2D4AE00E9FCD2 /* HomeWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,12 @@
 		8201506623B2D08800E9FCD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		8201506823B2D08800E9FCD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8201506923B2D08800E9FCD2 /* word_by_word.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = word_by_word.entitlements; sourceTree = "<group>"; };
+		8201506F23B2D21C00E9FCD2 /* SideBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideBarViewController.swift; sourceTree = "<group>"; };
+		8201507023B2D21C00E9FCD2 /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		8201507123B2D21C00E9FCD2 /* AddWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWindowController.swift; sourceTree = "<group>"; };
+		8201507223B2D21D00E9FCD2 /* AddWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddWindowController.xib; sourceTree = "<group>"; };
+		8201507723B2D4AE00E9FCD2 /* HomeWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWindowController.swift; sourceTree = "<group>"; };
+		8201507823B2D4AE00E9FCD2 /* HomeWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,12 +64,26 @@
 			isa = PBXGroup;
 			children = (
 				8201506123B2D07D00E9FCD2 /* AppDelegate.swift */,
+				8201507723B2D4AE00E9FCD2 /* HomeWindowController.swift */,
+				8201507823B2D4AE00E9FCD2 /* HomeWindowController.xib */,
+				8201506F23B2D21C00E9FCD2 /* SideBarViewController.swift */,
+				8201507B23B2D66200E9FCD2 /* Add */,
+				8201507023B2D21C00E9FCD2 /* ColorView.swift */,
 				8201506323B2D08800E9FCD2 /* Assets.xcassets */,
 				8201506523B2D08800E9FCD2 /* MainMenu.xib */,
 				8201506823B2D08800E9FCD2 /* Info.plist */,
 				8201506923B2D08800E9FCD2 /* word_by_word.entitlements */,
 			);
 			path = "word by word";
+			sourceTree = "<group>";
+		};
+		8201507B23B2D66200E9FCD2 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				8201507123B2D21C00E9FCD2 /* AddWindowController.swift */,
+				8201507223B2D21D00E9FCD2 /* AddWindowController.xib */,
+			);
+			path = Add;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8201506423B2D08800E9FCD2 /* Assets.xcassets in Resources */,
+				8201507623B2D21D00E9FCD2 /* AddWindowController.xib in Resources */,
+				8201507A23B2D4AE00E9FCD2 /* HomeWindowController.xib in Resources */,
 				8201506723B2D08800E9FCD2 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,7 +158,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8201507423B2D21D00E9FCD2 /* ColorView.swift in Sources */,
+				8201507923B2D4AE00E9FCD2 /* HomeWindowController.swift in Sources */,
+				8201507523B2D21D00E9FCD2 /* AddWindowController.swift in Sources */,
 				8201506223B2D07D00E9FCD2 /* AppDelegate.swift in Sources */,
+				8201507323B2D21D00E9FCD2 /* SideBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
