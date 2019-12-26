@@ -21,7 +21,7 @@ class SideBarViewController: NSViewController {
     // MARK: - Protocol
     
     override func loadView() {
-        self.view = ColorView(frame: NSRect(x: 0, y: 0, width: 150, height: AppDelegate.mainWindow!.frame.height))
+        self.view = ColorView(frame: NSRect(x: 0, y: 0, width: 150, height: 600))
         self.scrollView.frame = view.frame
         scrollView.drawsBackground = false
         view.addSubview(scrollView)
@@ -53,7 +53,7 @@ class SideBarViewController: NSViewController {
         let greyTranslucent = NSColor(calibratedRed: 0.7, green: 0.8, blue: 0.6, alpha: 0.4)
         
         //Setup dividing line
-        dividingLine.frame = NSRect(x: 10, y: view.bounds.height - sideBarButton.bounds.height - 30, width: 100, height: 2)
+        dividingLine.frame = NSRect(x: 10, y: view.bounds.height - 30 - 2 - 20, width: 100, height: 2)
 
         if hour >= 21 || hour < 5 { //night -> light
             (self.view as! ColorView).changeGradientColor(start: greyTranslucent, end: greyTranslucent)
@@ -90,6 +90,8 @@ class SideBarViewController: NSViewController {
         view.setFrameSize(NSSize(width: view.bounds.width, height: size.height))
         sideBarButton.setFrameOrigin(NSPoint(x: 0, y: size.height - 30 - 20))
         queueLabel.setFrameOrigin(NSPoint(x: 30, y: size.height - 20 - 20))
+        dividingLine.setFrameOrigin(NSPoint(x: 10, y: size.height - 30 - 2 - 20))
+        scrollView.setFrameSize(NSSize(width: view.bounds.width, height: size.height - sideBarButton.bounds.height - 30 - 30))
     }
     
 }

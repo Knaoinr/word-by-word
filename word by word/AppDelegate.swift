@@ -14,23 +14,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     // MARK: - Objects
     
     static var mainWindow: NSWindow?
-    let mainWindowController = HomeWindowController()
+    let mainWindowController = HomeWindowController(windowNibName: "HomeWindowController")
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
         
         //Start window
-        let window = NSWindow(contentRect: NSRect(x: 200, y: 200, width: 800, height: 600), styleMask: [.titled, .closable, .resizable, .miniaturizable], backing: NSWindow.BackingStoreType.buffered, defer: false)
-        window.orderFrontRegardless()
-        AppDelegate.mainWindow = window
+        AppDelegate.mainWindow = mainWindowController.window
         AppDelegate.mainWindow!.delegate = self
         AppDelegate.mainWindow!.isOpaque = false
-        AppDelegate.mainWindow!.windowController = mainWindowController
+        AppDelegate.mainWindow!.orderFrontRegardless()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+    
+    func windowDidResize(_ notification: Notification) {
+        mainWindowController.documentView.setFrameSize(NSSize(width: mainWindowController.scrollView.contentView.bounds.width, height: max(500, mainWindowController.scrollView.contentView.bounds.height)))
+        mainWindowController.sideBarController.reposition(size: AppDelegate.mainWindow!.frame.size)
     }
 
 
