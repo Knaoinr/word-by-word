@@ -16,6 +16,10 @@
 		8201507623B2D21D00E9FCD2 /* AddWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8201507223B2D21D00E9FCD2 /* AddWindowController.xib */; };
 		8201507923B2D4AE00E9FCD2 /* HomeWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201507723B2D4AE00E9FCD2 /* HomeWindowController.swift */; };
 		8201507A23B2D4AE00E9FCD2 /* HomeWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8201507823B2D4AE00E9FCD2 /* HomeWindowController.xib */; };
+		8201507E23B5159700E9FCD2 /* AddSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201507C23B5159700E9FCD2 /* AddSecondViewController.swift */; };
+		8201507F23B5159700E9FCD2 /* AddSecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8201507D23B5159700E9FCD2 /* AddSecondViewController.xib */; };
+		8201508123B542F800E9FCD2 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201508023B542F800E9FCD2 /* Song.swift */; };
+		8201508323B54C3D00E9FCD2 /* SongCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201508223B54C3D00E9FCD2 /* SongCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +35,10 @@
 		8201507223B2D21D00E9FCD2 /* AddWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddWindowController.xib; sourceTree = "<group>"; };
 		8201507723B2D4AE00E9FCD2 /* HomeWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWindowController.swift; sourceTree = "<group>"; };
 		8201507823B2D4AE00E9FCD2 /* HomeWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWindowController.xib; sourceTree = "<group>"; };
+		8201507C23B5159700E9FCD2 /* AddSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSecondViewController.swift; sourceTree = "<group>"; };
+		8201507D23B5159700E9FCD2 /* AddSecondViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSecondViewController.xib; sourceTree = "<group>"; };
+		8201508023B542F800E9FCD2 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		8201508223B54C3D00E9FCD2 /* SongCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,8 @@
 				8201507823B2D4AE00E9FCD2 /* HomeWindowController.xib */,
 				8201506F23B2D21C00E9FCD2 /* SideBarViewController.swift */,
 				8201507B23B2D66200E9FCD2 /* Add */,
+				8201508023B542F800E9FCD2 /* Song.swift */,
+				8201508223B54C3D00E9FCD2 /* SongCollection.swift */,
 				8201507023B2D21C00E9FCD2 /* ColorView.swift */,
 				8201506323B2D08800E9FCD2 /* Assets.xcassets */,
 				8201506523B2D08800E9FCD2 /* MainMenu.xib */,
@@ -82,6 +92,8 @@
 			children = (
 				8201507123B2D21C00E9FCD2 /* AddWindowController.swift */,
 				8201507223B2D21D00E9FCD2 /* AddWindowController.xib */,
+				8201507C23B5159700E9FCD2 /* AddSecondViewController.swift */,
+				8201507D23B5159700E9FCD2 /* AddSecondViewController.xib */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -145,6 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8201506423B2D08800E9FCD2 /* Assets.xcassets in Resources */,
+				8201507F23B5159700E9FCD2 /* AddSecondViewController.xib in Resources */,
 				8201507623B2D21D00E9FCD2 /* AddWindowController.xib in Resources */,
 				8201507A23B2D4AE00E9FCD2 /* HomeWindowController.xib in Resources */,
 				8201506723B2D08800E9FCD2 /* MainMenu.xib in Resources */,
@@ -158,10 +171,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8201508123B542F800E9FCD2 /* Song.swift in Sources */,
 				8201507423B2D21D00E9FCD2 /* ColorView.swift in Sources */,
+				8201508323B54C3D00E9FCD2 /* SongCollection.swift in Sources */,
 				8201507923B2D4AE00E9FCD2 /* HomeWindowController.swift in Sources */,
 				8201507523B2D21D00E9FCD2 /* AddWindowController.swift in Sources */,
 				8201506223B2D07D00E9FCD2 /* AppDelegate.swift in Sources */,
+				8201507E23B5159700E9FCD2 /* AddSecondViewController.swift in Sources */,
 				8201507323B2D21D00E9FCD2 /* SideBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

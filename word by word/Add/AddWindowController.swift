@@ -19,7 +19,9 @@ class AddWindowController: NSWindowController {
     @IBOutlet weak var artistTokenField: NSTokenField!
     @IBOutlet weak var lyricTextView: NSTextView!
     
-    // MARK: - Methods
+    var nextViewController = AddSecondViewController(songTitle: "", songArtists: [], songLyrics: [], backView: nil)
+    
+    // MARK: - Protocol
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -30,14 +32,49 @@ class AddWindowController: NSWindowController {
         nextButton.action = #selector(next)
     }
     
+    override func close() {
+        cancel()
+    }
+    
+    // MARK: - Action response methods
+    
+    // Next/cancel buttons
+    
     @objc func cancel() {
-        print("close")
-        window?.close()
+        (AppDelegate.mainWindow?.windowController as! HomeWindowController).addWindowArray.removeAll { (controller) -> Bool in
+            return self.isEqual(to: controller)
+        }
+        window!.close()
     }
     
     @objc func next() {
-        //
-        print("next")
+        if titleTextField.stringValue != "" && artistTokenField.stringValue != "" && lyricTextView.string != "" {
+            let artistArray = artistTokenField.objectValue as! Array<String>
+            
+            let lineArray = lyricTextView.string.split(separator: "\n")
+            var lyricArray:[Array<String>] = []
+            for x in 0...lineArray.count-1 {
+                lyricArray.append([])
+                for y in 0...lineArray[x].split(separator: " ").count - 1 {
+                    lyricArray[x].append(String(lineArray[x].split(separator: " ")[y]))
+                }
+            }
+            
+            nextViewController = AddSecondViewController(songTitle: titleTextField.stringValue, songArtists: artistArray, songLyrics: lyricArray, backView: window!.contentView!)
+            window!.contentViewController = nextViewController
+        }
     }
+    
+    // Check if fields filled out
+    
+    @IBAction func onTitle(_ sender: NSTextField) {
+        //if not all filled out (waiting on others)
+        if titleTextField.stringValue == "" {
+            nextButton.isEnabled = false
+        } else {
+            nextButton.isEnabled = true
+        }
+    }
+    //how to get the others in here?
     
 }

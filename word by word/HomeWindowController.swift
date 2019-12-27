@@ -66,6 +66,7 @@ class HomeWindowController: NSWindowController {
     }
     
     @IBAction func onSideBarButtonPress(_ sender: NSButton) {
+        sideBarButton.isHidden = true
         window!.contentView!.addSubview(sideBarController.view)
     }
     

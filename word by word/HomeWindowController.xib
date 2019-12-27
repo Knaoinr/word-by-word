@@ -38,7 +38,7 @@
                             <constraint firstAttribute="width" constant="30" id="9Eb-BB-eJt"/>
                             <constraint firstAttribute="height" constant="30" id="WkP-pf-sfx"/>
                         </constraints>
-                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSLeftFacingTriangleTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="XEr-b0-auN">
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRightFacingTriangleTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="XEr-b0-auN">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -240,7 +240,7 @@
     </objects>
     <resources>
         <image name="NSHomeTemplate" width="14" height="14"/>
-        <image name="NSLeftFacingTriangleTemplate" width="9" height="12"/>
+        <image name="NSRightFacingTriangleTemplate" width="9" height="12"/>
         <image name="add_orange" width="300" height="300"/>
         <image name="browse_orange" width="300" height="300"/>
         <image name="play_orange" width="600" height="600"/>

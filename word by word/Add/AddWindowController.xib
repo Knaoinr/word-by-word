@@ -27,15 +27,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xgy-Wi-EIo">
-                        <rect key="frame" x="8" y="249" width="54" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Artist(s)" id="0PC-AZ-iHN">
+                        <rect key="frame" x="8" y="249" width="60" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Artist(s)*" id="0PC-AZ-iHN">
                             <font key="font" usesAppearanceFont="YES"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <tokenField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXE-Ts-BQq">
-                        <rect key="frame" x="70" y="244" width="400" height="21"/>
+                        <rect key="frame" x="76" y="244" width="394" height="21"/>
                         <tokenFieldCell key="cell" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" allowsEditingTextAttributes="YES" id="VpQ-ac-TQw">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -43,24 +43,27 @@
                         </tokenFieldCell>
                     </tokenField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b7f-MO-Est">
-                        <rect key="frame" x="47" y="280" width="423" height="21"/>
+                        <rect key="frame" x="53" y="280" width="417" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Lq6-WS-8UD">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <action selector="onTitle:" target="-2" id="d9Z-Db-UJY"/>
+                        </connections>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EJr-PU-QkO">
-                        <rect key="frame" x="8" y="285" width="31" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Title" id="0tZ-d6-Lmc">
+                        <rect key="frame" x="8" y="285" width="37" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Title*" id="0tZ-d6-Lmc">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5W6-mI-f94">
-                        <rect key="frame" x="8" y="218" width="65" height="16"/>
-                        <textFieldCell key="cell" lineBreakMode="clipping" title="Raw lyrics" id="NAN-6N-mqs">
+                        <rect key="frame" x="8" y="218" width="71" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Raw lyrics*" id="NAN-6N-mqs">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -95,7 +98,7 @@
                     </scrollView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="elD-aN-hRO">
                         <rect key="frame" x="407" y="1" width="69" height="32"/>
-                        <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Lj5-rq-6Ka">
+                        <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Lj5-rq-6Ka">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent" base64-UTF8="YES">

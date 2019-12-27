@@ -25,6 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         AppDelegate.mainWindow!.delegate = self
         AppDelegate.mainWindow!.isOpaque = false
         AppDelegate.mainWindow!.orderFrontRegardless()
+        
+        //Reload from memory
+        reloadSavedData()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -36,6 +39,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         mainWindowController.sideBarController.reposition(size: AppDelegate.mainWindow!.frame.size)
     }
 
+    func reloadSavedData() {
+
+        // Song bank
+        let songBank:[Song] = []
+        let defaultSongBank = ["songBank" : songBank]
+        UserDefaults.standard.register(defaults: defaultSongBank)
+        
+        // Collections
+        let collectionBank:[SongCollection] = []
+        let defaultCollectionBank = ["collectionBank" : collectionBank]
+        UserDefaults.standard.register(defaults: defaultCollectionBank)
+
+    }
 
 }
 

@@ -38,6 +38,7 @@ class SideBarViewController: NSViewController {
     // MARK: - Action response methods
     
     @objc func onSideBarButtonPress() {
+        (AppDelegate.mainWindow!.windowController as! HomeWindowController).sideBarButton.isHidden = false
         view.removeFromSuperview()
     }
     
