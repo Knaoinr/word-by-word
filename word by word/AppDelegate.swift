@@ -38,19 +38,81 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         mainWindowController.documentView.setFrameSize(NSSize(width: mainWindowController.scrollView.contentView.bounds.width, height: max(500, mainWindowController.scrollView.contentView.bounds.height)))
         mainWindowController.sideBarController.reposition(size: AppDelegate.mainWindow!.frame.size)
     }
+    
+    // MARK: - Data
 
     func reloadSavedData() {
 
         // Song bank
         let songBank:[Song] = []
-        let defaultSongBank = ["songBank" : songBank]
-        UserDefaults.standard.register(defaults: defaultSongBank)
+        do {
+            let jsonData = try JSONEncoder().encode(songBank)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let defaultSongBank = ["songBank" : jsonString]
+            UserDefaults.standard.register(defaults: defaultSongBank)
+        } catch {
+            print("AppDelegate.reloadSavedData(): Failed to encode songBank")
+        }
         
         // Collections
         let collectionBank:[SongCollection] = []
-        let defaultCollectionBank = ["collectionBank" : collectionBank]
-        UserDefaults.standard.register(defaults: defaultCollectionBank)
+        do {
+            let jsonData = try JSONEncoder().encode(collectionBank)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let defaultCollectionBank = ["collectionBank" : jsonString]
+            UserDefaults.standard.register(defaults: defaultCollectionBank)
+        } catch {
+            print("AppDelegate.reloadSavedData(): Failed to encode collectionBank")
+        }
 
+    }
+    
+    //Get/set
+    
+    static var songBank: [Song] {
+        get {
+            var songBank:[Song] = []
+            do {
+                let jsonString = UserDefaults.standard.object(forKey: "songBank") as! String
+                let jsonData = jsonString.data(using: .utf8)!
+                songBank = try JSONDecoder().decode([Song].self, from: jsonData)
+            } catch {
+                print("AppDelegate.songBank: Could not convert to Song")
+            }
+            return songBank
+        }
+        set (bank) {
+            do {
+                let jsonData = try JSONEncoder().encode(bank)
+                let jsonString = String(data: jsonData, encoding: .utf8)!
+                UserDefaults.standard.set(jsonString, forKey: "songBank")
+            } catch {
+                print("AppDelegate.songBank: Failed to encode data")
+            }
+        }
+    }
+    
+    static var collectionBank: [SongCollection] {
+        get {
+            var collectionBank:[SongCollection] = []
+            do {
+                let jsonString = UserDefaults.standard.object(forKey: "collectionBank") as! String
+                let jsonData = jsonString.data(using: .utf8)!
+                collectionBank = try JSONDecoder().decode([SongCollection].self, from: jsonData)
+            } catch {
+                print("AppDelegate.collectionBank: Could not convert to SongCollection")
+            }
+            return collectionBank
+        }
+        set (bank) {
+            do {
+                let jsonData = try JSONEncoder().encode(bank)
+                let jsonString = String(data: jsonData, encoding: .utf8)!
+                UserDefaults.standard.set(jsonString, forKey: "collectionBank")
+            } catch {
+                print("AppDelegate.collectionBank: Failed to encode data")
+            }
+        }
     }
 
 }

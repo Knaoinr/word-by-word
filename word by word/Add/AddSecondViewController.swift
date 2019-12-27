@@ -59,10 +59,10 @@ class AddSecondViewController: NSViewController {
         // Do view setup here.
         
         //if there are already collections made
-        if !UserDefaults.standard.array(forKey: "collectionBank")!.isEmpty {
+        if !AppDelegate.collectionBank.isEmpty {
             //get titles
-            for element in UserDefaults.standard.array(forKey: "collectionBank")! {
-                titles.append((element as! SongCollection).title)
+            for element in AppDelegate.collectionBank {
+                titles.append(element.title)
             }
             firstCombo.addItems(withObjectValues: titles)
             secondCombo.addItems(withObjectValues: titles)
@@ -79,7 +79,69 @@ class AddSecondViewController: NSViewController {
     }
     
     @IBAction func done(_ sender: NSButton) {
-        print("done")
+        
+        //Create as song
+        let songLengthInSecs = CGFloat(60*songMinute.floatValue + songSecond.floatValue)
+        let firstLyricInSecs = CGFloat(60*firstMinute.floatValue + firstSecond.floatValue)
+        let song = Song(title: songTitle, artists: songArtists, lyrics: lyrics, songLength: songLengthInSecs, firstLyric: firstLyricInSecs)
+        song.setColors(topGradientColor: colorView.startColor, bottomGradientColor: colorView.endColor, fontColor: letter.textColor!)
+        
+        //Save song
+        var songBank = AppDelegate.songBank
+        songBank.append(song)
+        AppDelegate.songBank = songBank
+        
+        //Save into collections
+        var collectionBank = AppDelegate.collectionBank
+        
+        if firstCombo.stringValue != "" {
+            //if already exists, just add
+            if titles.contains(firstCombo.stringValue) {
+                //find collection
+                for collection in collectionBank {
+                    if collection.title == firstCombo.stringValue {
+                        collection.songs.append(song)
+                    }
+                }
+            } else {
+                //add new collection
+                collectionBank.append(SongCollection(title: firstCombo.stringValue, isOrdered: (firstOrdered.state == NSControl.StateValue.on), songs: [song]))
+            }
+        }
+        
+        if secondCombo.stringValue != "" && secondCombo.stringValue != firstCombo.stringValue {
+            //if already exists, just add
+            if titles.contains(secondCombo.stringValue) {
+                //find collection
+                for collection in collectionBank {
+                    if collection.title == secondCombo.stringValue {
+                        collection.songs.append(song)
+                    }
+                }
+            } else {
+                //add new collection
+                collectionBank.append(SongCollection(title: secondCombo.stringValue, isOrdered: (secondOrdered.state == NSControl.StateValue.on), songs: [song]))
+            }
+        }
+        
+        if thirdCombo.stringValue != "" && thirdCombo.stringValue != firstCombo.stringValue && thirdCombo.stringValue != secondCombo.stringValue {
+            //if already exists, just add
+            if titles.contains(thirdCombo.stringValue) {
+                //find collection
+                for collection in collectionBank {
+                    if collection.title == thirdCombo.stringValue {
+                        collection.songs.append(song)
+                    }
+                }
+            } else {
+                //add new collection
+                collectionBank.append(SongCollection(title: thirdCombo.stringValue, isOrdered: (thirdOrdered.state == NSControl.StateValue.on), songs: [song]))
+            }
+        }
+        
+        AppDelegate.collectionBank = collectionBank
+        
+        //TODO: Change to timing window's VC
     }
     
     // Combo boxes

@@ -8,11 +8,15 @@
 
 import Foundation
 
-class SongCollection {
-    
-    // MARK: - Objects
-    
+class SongCollection : Codable {
+        
     var title = ""
     var isOrdered = true
     var songs:[Song] = []
+    
+    init(title:String, isOrdered:Bool, songs:[Song]) {
+        self.title = title
+        self.isOrdered = isOrdered
+        self.songs = songs
+    }
 }
