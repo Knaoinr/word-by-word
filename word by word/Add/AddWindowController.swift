@@ -51,12 +51,17 @@ class AddWindowController: NSWindowController {
         if titleTextField.stringValue != "" && artistTokenField.stringValue != "" && lyricTextView.string != "" {
             let artistArray = artistTokenField.objectValue as! Array<String>
             
-            let lineArray = lyricTextView.string.split(separator: "\n")
+            let everyLineBreakIsN = lyricTextView.string.replacingOccurrences(of: "\r", with: "\n")
+            let lineArray = everyLineBreakIsN.split(separator: "\n")
             var lyricArray:[Array<String>] = []
+            var z = 0
             for x in 0...lineArray.count-1 {
-                lyricArray.append([])
-                for y in 0...lineArray[x].split(separator: " ").count - 1 {
-                    lyricArray[x].append(String(lineArray[x].split(separator: " ")[y]))
+                if lineArray[x].split(separator: " ").count > 0 {
+                    lyricArray.append([])
+                    for y in 0...lineArray[x].split(separator: " ").count - 1 {
+                        lyricArray[z].append(String(lineArray[x].split(separator: " ")[y]))
+                    }
+                    z += 1
                 }
             }
             

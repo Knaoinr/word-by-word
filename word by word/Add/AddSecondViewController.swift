@@ -141,7 +141,8 @@ class AddSecondViewController: NSViewController {
         
         AppDelegate.collectionBank = collectionBank
         
-        //TODO: Change to timing window's VC
+        //Change to timing window's VC
+        self.view.window!.contentViewController = TimingViewController(song)
     }
     
     // Combo boxes

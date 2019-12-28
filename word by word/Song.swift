@@ -17,7 +17,7 @@ class Song : Codable {
     var artists:[String] = []
     var lyrics:[Array<String>] = []
     
-    //timing?
+    var timing:[Array<CGFloat>] = []
     var songLength:CGFloat = 0
     var firstLyric:CGFloat = 0
     
@@ -33,12 +33,25 @@ class Song : Codable {
         self.lyrics = lyrics
         self.songLength = songLength
         self.firstLyric = firstLyric
+        
+        resetTimingSize()
     }
     
     func setColors(topGradientColor:NSColor, bottomGradientColor:NSColor, fontColor:NSColor) {
         self.topGradientComponents = topGradientColor.toComponents()
         self.bottomGradientComponents = bottomGradientColor.toComponents()
         self.fontComponents = fontColor.toComponents()
+    }
+    
+    func resetTimingSize() {
+        timing = []
+        for index in 0...lyrics.count-1 {
+            timing.append([])
+            for _ in lyrics[index] {
+                timing[index].append(songLength)
+            }
+        }
+        timing[0][0] = firstLyric
     }
 }
 
