@@ -14,7 +14,6 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
     
     var backView:NSView?
     
-    @IBOutlet weak var verticalScroller: NSScroller!
     @IBOutlet weak var collectionView: NSCollectionView!
     let dataSource = SearchDataSource()
     
@@ -38,7 +37,6 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
         view.setFrameSize(NSSize(width: AppDelegate.mainWindow!.frame.width, height: AppDelegate.mainWindow!.frame.height - 20))
         
         collectionView.backgroundColors = [.clear]
-        verticalScroller.controlSize = .mini
 
         collectionView.dataSource = dataSource
         collectionView.delegate = self

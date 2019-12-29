@@ -30,7 +30,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="6YD-ER-gQx"/>
                     </constraints>
-                    <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="Z6J-x8-Uii"/>
+                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="Z6J-x8-Uii"/>
                     <connections>
                         <action selector="onSlide:" target="-2" id="hGJ-MQ-0Go"/>
                     </connections>

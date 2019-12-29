@@ -6,10 +6,9 @@
 //  Copyright © 2019 Knaoinr. All rights reserved.
 //
 
-import Foundation
 import Cocoa
 
-class Song : Codable {
+class Song : Equatable, Codable {
     
     // MARK: - Variables
     
@@ -21,9 +20,9 @@ class Song : Codable {
     var songLength:CGFloat = 0
     var firstLyric:CGFloat = 0
     
-    var topGradientComponents = NSColor.clear.toComponents()
-    var bottomGradientComponents = NSColor.clear.toComponents()
-    var fontComponents = NSColor.white.toComponents()
+    private var topGradientComponents:[CGFloat] = [0,0,0,0]
+    private var bottomGradientComponents:[CGFloat] = [0,0,0,0]
+    private var fontComponents:[CGFloat] = [0,0,0,0]
     
     // MARK: - Methods
     
@@ -37,10 +36,18 @@ class Song : Codable {
         resetTimingSize()
     }
     
+    static func == (lhs: Song, rhs: Song) -> Bool {
+        if lhs.title == rhs.title && lhs.artists == rhs.artists {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func setColors(topGradientColor:NSColor, bottomGradientColor:NSColor, fontColor:NSColor) {
-        self.topGradientComponents = topGradientColor.toComponents()
-        self.bottomGradientComponents = bottomGradientColor.toComponents()
-        self.fontComponents = fontColor.toComponents()
+        self.topGradientColor = topGradientColor
+        self.bottomGradientColor = bottomGradientColor
+        self.fontColor = fontColor
     }
     
     func resetTimingSize() {
@@ -53,21 +60,36 @@ class Song : Codable {
         }
         timing[0][0] = firstLyric
     }
-}
-
-extension NSColor {
-    func toComponents() -> [CGFloat] {
-        let color = self.usingColorSpace(.deviceRGB)
-        return [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
+    
+    // MARK: - Changing to/from colors
+    
+    var topGradientColor: NSColor {
+        get {
+            return NSColor(calibratedRed: topGradientComponents[0], green: topGradientComponents[1], blue: topGradientComponents[2], alpha: topGradientComponents[3])
+        }
+        set (settingColor) {
+            let color = settingColor.usingColorSpace(.deviceRGB)
+            topGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
+        }
     }
-}
-
-extension Array where Element == CGFloat {
-    func toColor() -> NSColor {
-        if count == 4 {
-            return NSColor(calibratedRed: self[0], green: self[1], blue: self[2], alpha: self[3])
-        } else {
-            return NSColor.clear
+    
+    var bottomGradientColor: NSColor {
+        get {
+            return NSColor(calibratedRed: bottomGradientComponents[0], green: bottomGradientComponents[1], blue: bottomGradientComponents[2], alpha: bottomGradientComponents[3])
+        }
+        set (settingColor) {
+            let color = settingColor.usingColorSpace(.deviceRGB)
+            topGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
+        }
+    }
+    
+    var fontColor: NSColor {
+        get {
+            return NSColor(calibratedRed: fontComponents[0], green: fontComponents[1], blue: fontComponents[2], alpha: fontComponents[3])
+        }
+        set (settingColor) {
+            let color = settingColor.usingColorSpace(.deviceRGB)
+            topGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
         }
     }
 }

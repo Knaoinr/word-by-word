@@ -22,8 +22,12 @@
 		8201508323B54C3D00E9FCD2 /* SongCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201508223B54C3D00E9FCD2 /* SongCollection.swift */; };
 		8201508623B5AB1700E9FCD2 /* TimingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8201508423B5AB1700E9FCD2 /* TimingViewController.swift */; };
 		8201508723B5AB1700E9FCD2 /* TimingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8201508523B5AB1700E9FCD2 /* TimingViewController.xib */; };
+		8215F8EC23B9488200088F23 /* ScrollessScroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215F8EB23B9488200088F23 /* ScrollessScroller.swift */; };
 		829C2F5223B6E6FF000CE4F0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829C2F5023B6E6FF000CE4F0 /* SearchViewController.swift */; };
 		829C2F5323B6E6FF000CE4F0 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829C2F5123B6E6FF000CE4F0 /* SearchViewController.xib */; };
+		82DEB47423B6F21B0068CA11 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */; };
+		82DEB47723B7B2930068CA11 /* SearchCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */; };
+		82DEB47823B7B2930068CA11 /* SearchCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82DEB47623B7B2930068CA11 /* SearchCollectionViewItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +49,12 @@
 		8201508223B54C3D00E9FCD2 /* SongCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCollection.swift; sourceTree = "<group>"; };
 		8201508423B5AB1700E9FCD2 /* TimingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingViewController.swift; sourceTree = "<group>"; };
 		8201508523B5AB1700E9FCD2 /* TimingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimingViewController.xib; sourceTree = "<group>"; };
+		8215F8EB23B9488200088F23 /* ScrollessScroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollessScroller.swift; sourceTree = "<group>"; };
 		829C2F5023B6E6FF000CE4F0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		829C2F5123B6E6FF000CE4F0 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
+		82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewItem.swift; sourceTree = "<group>"; };
+		82DEB47623B7B2930068CA11 /* SearchCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionViewItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,10 @@
 			children = (
 				829C2F5023B6E6FF000CE4F0 /* SearchViewController.swift */,
 				829C2F5123B6E6FF000CE4F0 /* SearchViewController.xib */,
+				82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */,
+				82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */,
+				82DEB47623B7B2930068CA11 /* SearchCollectionViewItem.xib */,
+				8215F8EB23B9488200088F23 /* ScrollessScroller.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -185,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8201506423B2D08800E9FCD2 /* Assets.xcassets in Resources */,
+				82DEB47823B7B2930068CA11 /* SearchCollectionViewItem.xib in Resources */,
 				8201507F23B5159700E9FCD2 /* AddSecondViewController.xib in Resources */,
 				8201507623B2D21D00E9FCD2 /* AddWindowController.xib in Resources */,
 				8201507A23B2D4AE00E9FCD2 /* HomeWindowController.xib in Resources */,
@@ -202,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				829C2F5223B6E6FF000CE4F0 /* SearchViewController.swift in Sources */,
+				82DEB47423B6F21B0068CA11 /* SearchDataSource.swift in Sources */,
 				8201508123B542F800E9FCD2 /* Song.swift in Sources */,
 				8201507423B2D21D00E9FCD2 /* ColorView.swift in Sources */,
 				8201508323B54C3D00E9FCD2 /* SongCollection.swift in Sources */,
@@ -209,6 +223,8 @@
 				8201507523B2D21D00E9FCD2 /* AddWindowController.swift in Sources */,
 				8201506223B2D07D00E9FCD2 /* AppDelegate.swift in Sources */,
 				8201508623B5AB1700E9FCD2 /* TimingViewController.swift in Sources */,
+				8215F8EC23B9488200088F23 /* ScrollessScroller.swift in Sources */,
+				82DEB47723B7B2930068CA11 /* SearchCollectionViewItem.swift in Sources */,
 				8201507E23B5159700E9FCD2 /* AddSecondViewController.swift in Sources */,
 				8201507323B2D21D00E9FCD2 /* SideBarViewController.swift in Sources */,
 			);

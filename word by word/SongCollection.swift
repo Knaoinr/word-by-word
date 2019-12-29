@@ -6,13 +6,14 @@
 //  Copyright © 2019 Knaoinr. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 class SongCollection : Codable {
         
     var title = ""
     var isOrdered = true
     var songs:[Song] = []
+    //TODO: var image - make it codable
     
     init(title:String, isOrdered:Bool, songs:[Song]) {
         self.title = title

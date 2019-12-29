@@ -86,19 +86,15 @@ class TimingViewController: NSViewController {
         
         endLabel.stringValue = "\(Double(round(10*song!.songLength)/10))"
         timeSlider.maxValue = Double(song!.songLength)
-        
-        //find when down arrow is press
-        NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (event) -> NSEvent? in
-            if event.keyCode == 125 {
-                self.onDownArrow()
-                return nil
-            }
-            
-            return event
-        }
     }
     
     // MARK: - Action response methods
+    
+    override func keyDown(with event: NSEvent) {
+        if event.keyCode == 125 {
+            onDownArrow()
+        }
+    }
     
     //Restart/done buttons
     

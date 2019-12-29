@@ -12,7 +12,6 @@
                 <outlet property="homeAddLabel" destination="PH5-GR-dSe" id="Pyp-Sm-maB"/>
                 <outlet property="homeBrowseButton" destination="5yc-RA-VaW" id="tpj-pt-7kG"/>
                 <outlet property="homeBrowseLabel" destination="4Q5-HP-Jqj" id="frE-0J-5OC"/>
-                <outlet property="homeButton" destination="FyT-ip-hIO" id="eGj-cq-s4e"/>
                 <outlet property="homePlayButton" destination="UZA-r4-ujr" id="PhM-pW-gUx"/>
                 <outlet property="homeSearchButton" destination="l7O-U6-rL2" id="k5O-KL-82m"/>
                 <outlet property="homeSearchLabel" destination="sez-if-TMN" id="0h3-pV-ZDZ"/>
@@ -30,7 +29,7 @@
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" id="se5-gp-TjO" customClass="ColorView" customModule="word_by_word" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ur3-KM-q02">
                         <rect key="frame" x="0.0" y="570" width="30" height="30"/>
@@ -56,6 +55,9 @@
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <connections>
+                            <action selector="onHomeButtonPress:" target="-2" id="G5A-7J-pvo"/>
+                        </connections>
                     </button>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ga3-t2-jZL">
                         <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>

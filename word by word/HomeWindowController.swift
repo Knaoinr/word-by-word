@@ -26,13 +26,13 @@ class HomeWindowController: NSWindowController {
     @IBOutlet weak var homeAddLabel: NSTextField!
     
     @IBOutlet weak var sideBarButton: NSButton!
-    @IBOutlet weak var homeButton: NSButton!
     let sideBarController = SideBarViewController()
+    
+    var searchViewController = SearchViewController(backView: nil)
     
     var addWindowArray = Array<AddWindowController>()
     
     let peach = NSColor(calibratedRed: 1, green: 0.3, blue: 0.3, alpha: 1)
-    
     
     // MARK: - Protocol
 
@@ -52,7 +52,9 @@ class HomeWindowController: NSWindowController {
     }
     
     @IBAction func onSearchButtonPress(_ sender: NSButton) {
-        //
+        //create new search view to replace document view
+        searchViewController = SearchViewController(backView: documentView)
+        scrollView.documentView = searchViewController.view
     }
     
     @IBAction func onBrowseButtonPress(_ sender: NSButton) {
@@ -68,6 +70,10 @@ class HomeWindowController: NSWindowController {
     @IBAction func onSideBarButtonPress(_ sender: NSButton) {
         sideBarButton.isHidden = true
         window!.contentView!.addSubview(sideBarController.view)
+    }
+    
+    @IBAction func onHomeButtonPress(_ sender: NSButton) {
+        scrollView.documentView = documentView
     }
     
     // MARK: - Homemade functions
