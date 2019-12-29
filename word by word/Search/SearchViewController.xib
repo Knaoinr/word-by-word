@@ -7,15 +7,68 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SearchViewController" customModule="word_by_word" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="2al-EZ-LGP" id="5Ux-Bi-HXX"/>
+                <outlet property="verticalScroller" destination="wkj-M5-9B2" id="MmC-Kq-gID"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY" customClass="ColorView" customModule="word_by_word" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="663" height="411"/>
+            <rect key="frame" x="0.0" y="0.0" width="372" height="484"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <point key="canvasLocation" x="232.5" y="223.5"/>
+            <subviews>
+                <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mAa-rh-xVy">
+                    <rect key="frame" x="34" y="414" width="305" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Cwf-Nc-ljm"/>
+                        <constraint firstAttribute="width" constant="305" id="ypO-ub-xLN"/>
+                    </constraints>
+                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" maximumRecents="0" id="QKA-zU-rPL">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </searchFieldCell>
+                    <connections>
+                        <action selector="onSearch:" target="-2" id="OJk-ot-dl7"/>
+                    </connections>
+                </searchField>
+                <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="T64-RE-GOH">
+                    <rect key="frame" x="34" y="20" width="305" height="374"/>
+                    <clipView key="contentView" copiesOnScroll="NO" id="sqL-5U-fHr">
+                        <rect key="frame" x="0.0" y="0.0" width="305" height="374"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView selectable="YES" allowsMultipleSelection="YES" id="2al-EZ-LGP">
+                                <rect key="frame" x="0.0" y="0.0" width="305" height="374"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="nNy-v1-iYm">
+                                    <size key="itemSize" width="302" height="50"/>
+                                </collectionViewFlowLayout>
+                                <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="ynf-tK-FwX">
+                        <rect key="frame" x="-100" y="-100" width="248" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="wkj-M5-9B2" customClass="ScrollessScroller" customModule="word_by_word" customModuleProvider="target">
+                        <rect key="frame" x="-100" y="-100" width="15" height="143"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="T64-RE-GOH" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="1y2-1n-u9Y"/>
+                <constraint firstItem="mAa-rh-xVy" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="8Py-RL-d68"/>
+                <constraint firstItem="T64-RE-GOH" firstAttribute="width" secondItem="mAa-rh-xVy" secondAttribute="width" id="OZV-DC-4d4"/>
+                <constraint firstItem="mAa-rh-xVy" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Yhf-Rc-pAA"/>
+                <constraint firstAttribute="bottom" secondItem="T64-RE-GOH" secondAttribute="bottom" constant="20" id="cg1-0C-hL5"/>
+                <constraint firstItem="T64-RE-GOH" firstAttribute="top" secondItem="mAa-rh-xVy" secondAttribute="bottom" constant="20" id="vbE-uR-6rT"/>
+            </constraints>
+            <point key="canvasLocation" x="244" y="260"/>
         </customView>
     </objects>
 </document>
