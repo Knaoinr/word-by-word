@@ -15,7 +15,8 @@ class SearchCollectionViewItem: NSCollectionViewItem {
     @IBOutlet weak var titleLabel: NSTextField!
     @IBOutlet weak var artistLabel: NSTextField!
     
-    var song:Song?
+    var song:Song!
+    var editingWindowController:EditingWindowController?
     
     // MARK: - Methods
     
@@ -33,24 +34,30 @@ class SearchCollectionViewItem: NSCollectionViewItem {
         super.viewDidLoad()
         // Do view setup here.
         
-        if song != nil {
-            setupWithSong(song!)
-        }
+        setupWithSong()
     }
     
-    func setupWithSong(_ song: Song) {
-        (view as! ColorView).changeGradientColor(start: song.topGradientComponents.toColor(), end: song.bottomGradientComponents.toColor())
+    //sets up UI for song; can be recalled when song changed
+    func setupWithSong() {
+        (view as! ColorView).changeGradientColor(start: song.topGradientColor, end: song.bottomGradientColor)
         titleLabel.stringValue = song.title
         artistLabel.stringValue = "by"
         for artist in song.artists {
             artistLabel.stringValue += " " + artist + ","
         }
         let _ = artistLabel.stringValue.popLast()
-        titleLabel.textColor = song.fontComponents.toColor()
-        artistLabel.textColor = song.fontComponents.toColor()
+        titleLabel.textColor = song.fontColor
+        artistLabel.textColor = song.fontColor
+        
+        editingWindowController = EditingWindowController(song)
     }
     
     @IBAction func onSettingsPress(_ sender: NSButton) {
+        //if closed, recreate; else pull up already open window
+        if editingWindowController == nil {
+            editingWindowController = EditingWindowController(song)
+        }
+        editingWindowController!.window?.makeKeyAndOrderFront(self)
     }
     
 }

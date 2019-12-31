@@ -16,7 +16,7 @@ class AddSecondViewController: NSViewController {
     var songArtists:[String] = []
     var lyrics:[Array<String>] = []
     
-    var backView:NSView?
+    var backView:NSView!
     
     @IBOutlet weak var doneButton: NSButton!
     
@@ -40,7 +40,7 @@ class AddSecondViewController: NSViewController {
     
     // MARK: - Protocol
     
-    init(songTitle:String, songArtists:[String], songLyrics:Array<Array<String>>, backView:NSView?) {
+    init(songTitle:String, songArtists:[String], songLyrics:Array<Array<String>>, backView:NSView) {
         super.init(nibName: "AddSecondViewController", bundle: Bundle.main)
         
         self.songTitle = songTitle
@@ -68,6 +68,8 @@ class AddSecondViewController: NSViewController {
             secondCombo.addItems(withObjectValues: titles)
             thirdCombo.addItems(withObjectValues: titles)
         }
+        
+        view.window!.title = "Creating \"" + songTitle + "\""
     }
     
     // MARK: - Action response methods
@@ -75,7 +77,7 @@ class AddSecondViewController: NSViewController {
     // Back/done buttons
     
     @IBAction func back(_ sender: NSButton) {
-        view = backView!
+        view = backView
     }
     
     @IBAction func done(_ sender: NSButton) {

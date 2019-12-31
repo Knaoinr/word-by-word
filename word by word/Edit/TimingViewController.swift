@@ -12,7 +12,7 @@ class TimingViewController: NSViewController {
     
     // MARK: - Objects
     
-    var song:Song?
+    var song:Song!
     var newTiming:[Array<CGFloat>] = []
     var justEditedTiming:[Array<CGFloat>] = []
     var oneBelowIndex:[Int]?
@@ -51,21 +51,21 @@ class TimingViewController: NSViewController {
         // Do view setup here.
         
         //setup colors
-        (view as! ColorView).changeGradientColor(start: song!.topGradientComponents.toColor(), end: song!.bottomGradientComponents.toColor())
-        twoAboveLabel.textColor = song!.fontComponents.toColor()
-        oneAboveLabel.textColor = song!.fontComponents.toColor()
-        mainLabel.textColor = song!.fontComponents.toColor()
-        oneBelowLabel.textColor = song!.fontComponents.toColor()
-        twoBelowLabel.textColor = song!.fontComponents.toColor()
+        (view as! ColorView).changeGradientColor(start: song.topGradientColor, end: song.bottomGradientColor)
+        twoAboveLabel.textColor = song.fontColor
+        oneAboveLabel.textColor = song.fontColor
+        mainLabel.textColor = song.fontColor
+        oneBelowLabel.textColor = song.fontColor
+        twoBelowLabel.textColor = song.fontColor
         
-        startLabel.textColor = song!.fontComponents.toColor()
-        endLabel.textColor = song!.fontComponents.toColor()
+        startLabel.textColor = song.fontColor
+        endLabel.textColor = song.fontColor
         
         //place text in labels
-        mainLabel.stringValue = song!.lyrics[0][0]
+        mainLabel.stringValue = song.lyrics[0][0]
         if getNextWordIndex(0, 0) != nil {
             oneBelowIndex = getNextWordIndex(0, 0)!
-            oneBelowLabel.stringValue = song!.lyrics[oneBelowIndex![0]][oneBelowIndex![1]]
+            oneBelowLabel.stringValue = song.lyrics[oneBelowIndex![0]][oneBelowIndex![1]]
             
             if getNextWordIndex(oneBelowIndex![0], oneBelowIndex![1]) != nil {
                 twoBelowIndex = getNextWordIndex(oneBelowIndex![0], oneBelowIndex![1])!
@@ -81,11 +81,11 @@ class TimingViewController: NSViewController {
         }
         
         //starting point
-        timeSlider.doubleValue = Double(song!.firstLyric)
-        startLabel.stringValue = "\(Double(round(10*song!.firstLyric)/10))"
+        timeSlider.doubleValue = Double(song.firstLyric)
+        startLabel.stringValue = "\(Double(round(10*song.firstLyric)/10))"
         
-        endLabel.stringValue = "\(Double(round(10*song!.songLength)/10))"
-        timeSlider.maxValue = Double(song!.songLength)
+        endLabel.stringValue = "\(Double(round(10*song.songLength)/10))"
+        timeSlider.maxValue = Double(song.songLength)
     }
     
     // MARK: - Action response methods
@@ -132,14 +132,14 @@ class TimingViewController: NSViewController {
         
         //put correct lyrics in place
         let mainIndex = getWordAtTime(CGFloat(sender.doubleValue))
-        mainLabel.stringValue = song!.lyrics[mainIndex[0]][mainIndex[1]]
+        mainLabel.stringValue = song.lyrics[mainIndex[0]][mainIndex[1]]
         if let nextIndex = getNextWordIndex(mainIndex[0], mainIndex[1]) {
             oneBelowIndex = nextIndex
-            oneBelowLabel.stringValue = song!.lyrics[nextIndex[0]][nextIndex[1]]
+            oneBelowLabel.stringValue = song.lyrics[nextIndex[0]][nextIndex[1]]
             
             if let evenNextIndex = getNextWordIndex(nextIndex[0], nextIndex[1]) {
                 twoBelowIndex = evenNextIndex
-                twoBelowLabel.stringValue = song!.lyrics[evenNextIndex[0]][evenNextIndex[1]]
+                twoBelowLabel.stringValue = song.lyrics[evenNextIndex[0]][evenNextIndex[1]]
             } else {
                 twoBelowIndex = nil
                 twoBelowLabel.stringValue = ""
@@ -151,10 +151,10 @@ class TimingViewController: NSViewController {
             twoBelowLabel.stringValue = ""
         }
         if let nextIndex = getLastWordIndex(mainIndex[0], mainIndex[1]) {
-            oneAboveLabel.stringValue = song!.lyrics[nextIndex[0]][nextIndex[1]]
+            oneAboveLabel.stringValue = song.lyrics[nextIndex[0]][nextIndex[1]]
             
             if let evenNextIndex = getLastWordIndex(nextIndex[0], nextIndex[1]) {
-                twoAboveLabel.stringValue = song!.lyrics[evenNextIndex[0]][evenNextIndex[1]]
+                twoAboveLabel.stringValue = song.lyrics[evenNextIndex[0]][evenNextIndex[1]]
             } else {
                 twoAboveLabel.stringValue = ""
             }
@@ -180,7 +180,7 @@ class TimingViewController: NSViewController {
         if timeSlider.doubleValue >= Double(song!.songLength) {
             onPausePlay(playPauseButton)
             timeSlider.doubleValue = timeSlider.maxValue
-            startLabel.stringValue = "\(Double(round(10*song!.songLength)/10))"
+            startLabel.stringValue = "\(Double(round(10*song.songLength)/10))"
         }
     }
     
@@ -198,7 +198,7 @@ class TimingViewController: NSViewController {
             if twoBelowIndex != nil {
                 if getNextWordIndex(twoBelowIndex![0], twoBelowIndex![1]) != nil {
                     twoBelowIndex = getNextWordIndex(twoBelowIndex![0], twoBelowIndex![1])!
-                    twoBelowLabel.stringValue = song!.lyrics[twoBelowIndex![0]][twoBelowIndex![1]]
+                    twoBelowLabel.stringValue = song.lyrics[twoBelowIndex![0]][twoBelowIndex![1]]
                 } else {
                     twoBelowIndex = nil
                     twoBelowLabel.stringValue = ""
@@ -211,9 +211,9 @@ class TimingViewController: NSViewController {
     
     //Find next lyric from index
     func getNextWordIndex(_ lastX: Int, _ lastY: Int) -> [Int]? {
-        if song!.lyrics[lastX].count-1 > lastY { //if there are more in this row
+        if song.lyrics[lastX].count-1 > lastY { //if there are more in this row
             return [lastX, lastY+1]
-        } else if song!.lyrics.count-1 > lastX { //if there are more in next row
+        } else if song.lyrics.count-1 > lastX { //if there are more in next row
             return [lastX+1, 0]
         } else {
             return nil
@@ -224,14 +224,14 @@ class TimingViewController: NSViewController {
         if lastY > 0 { //if there are more in this row
             return [lastX, lastY-1]
         } else if lastX > 0 { //if there are more in last row
-            return [lastX-1, song!.lyrics[lastX-1].count-1]
+            return [lastX-1, song.lyrics[lastX-1].count-1]
         } else {
             return nil
         }
     }
     
     func getWordAtTime(_ time: CGFloat) -> [Int] {
-        if time <= song!.firstLyric {
+        if time <= song.firstLyric {
             return [0, 0]
         }
         

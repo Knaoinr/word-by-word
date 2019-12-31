@@ -10,6 +10,8 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+    
+    //TODO: shortcuts & tool tips...
 
     // MARK: - Objects
     

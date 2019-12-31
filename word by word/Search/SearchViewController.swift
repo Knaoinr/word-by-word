@@ -55,12 +55,12 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
                 //set cell to highlighted
                 ((collectionView.item(at: path) as! SearchCollectionViewItem).view as! ColorView).changeGradientColor(start: .systemBlue, end: .systemBlue)
             }
-        } else if highlightState == .none {
+        } else if highlightState == .none || highlightState == .forDeselection {
             //unhighlight
             for path in indexPaths {
                 //set cell to regular
                 if !collectionView.item(at: path)!.isSelected {
-                    (collectionView.item(at: path) as! SearchCollectionViewItem).setupWithSong(dataSource.searchResults[path.item])
+                    (collectionView.item(at: path) as! SearchCollectionViewItem).setupWithSong()
                 }
             }
         }
@@ -68,16 +68,43 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
     
     //holding command key allows multiple select
     func collectionView(_ collectionView: NSCollectionView, shouldDeselectItemsAt indexPaths: Set<IndexPath>) -> Set<IndexPath> {
+        //cmd key
         if NSEvent.modifierFlags.contains(.command) {
-            //TODO: change this so if something is already selected it's deselected
-            return []
+            //if something is already selected it's deselected; else, do not deselect
+            var pathsToReturn:Set<IndexPath> = []
+            for path in indexPaths {
+                if collectionView.item(at: path)!.isSelected {
+                    pathsToReturn.insert(path)
+                }
+            }
+            return pathsToReturn
         }
         //don't do the shift thing bc i dont like it
+
+        //else just deselect everything offered
         return indexPaths
     }
     
-    //TODO: cmd + A selects all
-    //TODO: deselect by pressing on it
+    //change highlight state on programmatic de/selection as well as regular
+    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        collectionView.delegate!.collectionView?(collectionView, didChangeItemsAt: indexPaths, to: .forDeselection)
+    }
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        collectionView.delegate!.collectionView?(collectionView, didChangeItemsAt: indexPaths, to: .forSelection)
+    }
+    
+    //selecting outside CV deselects
+    override func mouseDown(with event: NSEvent) {
+        //do normal stuff
+        super.mouseDown(with: event)
+        
+        //if not cmd key
+        if !NSEvent.modifierFlags.contains(.command) {
+            collectionView.deselectAll(nil)
+        }
+        
+        view.window!.makeFirstResponder(nil)
+    }
     
     
     // MARK: - Methods

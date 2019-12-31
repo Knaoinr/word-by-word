@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class AddWindowController: NSWindowController {
+class AddWindowController: NSWindowController, NSWindowDelegate {
     
     // MARK: - Objects
     
@@ -19,7 +19,7 @@ class AddWindowController: NSWindowController {
     @IBOutlet weak var artistTokenField: NSTokenField!
     @IBOutlet weak var lyricTextView: NSTextView!
     
-    var nextViewController = AddSecondViewController(songTitle: "", songArtists: [], songLyrics: [], backView: nil)
+    var nextViewController:AddSecondViewController?
     
     // MARK: - Protocol
     
@@ -28,12 +28,16 @@ class AddWindowController: NSWindowController {
 
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
         
+        window!.delegate = self
+        
         cancelButton.action = #selector(cancel)
         nextButton.action = #selector(next)
     }
     
-    override func close() {
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        // use cancel method instead of closing
         cancel()
+        return false
     }
     
     // MARK: - Action response methods
@@ -66,7 +70,7 @@ class AddWindowController: NSWindowController {
             }
             
             nextViewController = AddSecondViewController(songTitle: titleTextField.stringValue, songArtists: artistArray, songLyrics: lyricArray, backView: window!.contentView!)
-            window!.contentViewController = nextViewController
+            window!.contentViewController = nextViewController!
         }
     }
     
@@ -74,10 +78,12 @@ class AddWindowController: NSWindowController {
     
     @IBAction func onTitle(_ sender: NSTextField) {
         //if not all filled out (waiting on others)
-        if titleTextField.stringValue == "" {
+        if sender.stringValue == "" {
             nextButton.isEnabled = false
+            window!.title = ""
         } else {
             nextButton.isEnabled = true
+            window!.title = "Creating \"" + sender.stringValue + "\""
         }
     }
     //how to get the others in here?

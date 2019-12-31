@@ -35,20 +35,28 @@ class SearchDataSource : NSObject, NSCollectionViewDataSource {
         searchResults = []
         
         for song in AppDelegate.songBank {
-            if song.title.contains(searchString) {
-                searchResults.append(song)
-            } else if song.artists.contains(searchString) {
+            //for title
+            if song.title.lowercased().contains(searchString.lowercased()) {
                 searchResults.append(song)
             } else {
+                //for artist
                 for artist in song.artists {
-                    if artist.contains(searchString) && !searchResults.contains(song) {
+                    if artist.lowercased().contains(searchString.lowercased()) && !searchResults.contains(song) {
                         searchResults.append(song)
                     }
                 }
                 
                 for line in song.lyrics {
+                    //for phrase
                     if line.contains(searchString) && !searchResults.contains(song) {
                         searchResults.append(song)
+                    } else {
+                        //for word
+                        for word in line {
+                            if word.lowercased().contains(searchString.lowercased()) && !searchResults.contains(song) {
+                                searchResults.append(song)
+                            }
+                        }
                     }
                 }
             }

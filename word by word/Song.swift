@@ -23,6 +23,7 @@ class Song : Equatable, Codable {
     private var topGradientComponents:[CGFloat] = [0,0,0,0]
     private var bottomGradientComponents:[CGFloat] = [0,0,0,0]
     private var fontComponents:[CGFloat] = [0,0,0,0]
+    private var alternateFontComponents:[CGFloat]?
     
     // MARK: - Methods
     
@@ -79,7 +80,7 @@ class Song : Equatable, Codable {
         }
         set (settingColor) {
             let color = settingColor.usingColorSpace(.deviceRGB)
-            topGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
+            bottomGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
         }
     }
     
@@ -89,7 +90,25 @@ class Song : Equatable, Codable {
         }
         set (settingColor) {
             let color = settingColor.usingColorSpace(.deviceRGB)
-            topGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
+            fontComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
+        }
+    }
+    
+    var alternateFontColor: NSColor? {
+        get {
+            if alternateFontComponents != nil {
+                return NSColor(calibratedRed: alternateFontComponents![0], green: alternateFontComponents![1], blue: alternateFontComponents![2], alpha: alternateFontComponents![3])
+            } else {
+                return nil
+            }
+        }
+        set (settingColor) {
+            if settingColor != nil {
+                let color = settingColor!.usingColorSpace(.deviceRGB)
+                alternateFontComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
+            } else {
+                alternateFontComponents = nil
+            }
         }
     }
 }
