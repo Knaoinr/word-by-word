@@ -66,10 +66,10 @@ class Song : Equatable, Codable {
     
     var topGradientColor: NSColor {
         get {
-            return NSColor(calibratedRed: topGradientComponents[0], green: topGradientComponents[1], blue: topGradientComponents[2], alpha: topGradientComponents[3])
+            return NSColor(calibratedRed: topGradientComponents[0], green: topGradientComponents[1], blue: topGradientComponents[2], alpha: topGradientComponents[3]).usingColorSpace(.genericRGB)!
         }
         set (settingColor) {
-            let color = settingColor.usingColorSpace(.deviceRGB)
+            let color = settingColor.usingColorSpace(.genericRGB)
             topGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
         }
     }

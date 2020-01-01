@@ -103,7 +103,7 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
             collectionView.deselectAll(nil)
         }
         
-        view.window!.makeFirstResponder(nil)
+        AppDelegate.mainWindow!.makeFirstResponder(nil)
     }
     
     

@@ -68,8 +68,6 @@ class AddSecondViewController: NSViewController {
             secondCombo.addItems(withObjectValues: titles)
             thirdCombo.addItems(withObjectValues: titles)
         }
-        
-        view.window!.title = "Creating \"" + songTitle + "\""
     }
     
     // MARK: - Action response methods

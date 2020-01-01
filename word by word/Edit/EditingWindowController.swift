@@ -13,6 +13,8 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     // MARK: - Objects
     
     var song:Song!
+    var sender:SearchCollectionViewItem!
+    var newSong:Song?
     
     @IBOutlet weak var titleTextField: NSTextField!
     @IBOutlet weak var artistsTokenField: NSTokenField!
@@ -44,10 +46,11 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         return "EditingWindowController"
     }
     
-    init(_ song: Song) {
+    init(song: Song, sender: SearchCollectionViewItem) {
         super.init(window: nil)
         
         self.song = song
+        self.sender = sender
     }
     
     required init?(coder: NSCoder) {
@@ -90,22 +93,101 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     
     // MARK: - Action response methods
     
+    // Correctly exits window (does not save, but does not revert)
     @IBAction func cancel(_ sender: NSButton?) {
-        //TODO: set search item self value to nil
+        //set search item self value to nil
         window!.close()
+        self.sender.editingWindowController = nil
     }
     
     @IBAction func saveAndQuit(_ sender: NSButton) {
+        //if can save, do save, then use cancel() to set self to nil
+        if saveIfPossible() {
+            cancel(nil)
+        }
     }
     
     @IBAction func saveAndEditTiming(_ sender: NSButton) {
+        //if can save, do save, then switch to timing VC
+        if saveIfPossible() {
+            window!.contentViewController = TimingViewController(newSong!)
+        }
+    }
+    
+    func saveIfPossible() -> Bool {
+        //check to make sure everything vital is filled out
+        if titleTextField.stringValue == "" || artistsTokenField.stringValue == "" || lyricsTextView.string == "" || songMinute.stringValue == "" || songSecond.stringValue == "" || firstMinute.stringValue == "" || firstSecond.stringValue == "" {
+            return false
+        }
+        
+        //copy song to some extent
+        newSong = Song(title: song.title, artists: song.artists, lyrics: song.lyrics, songLength: song.songLength, firstLyric: song.firstLyric)
+        newSong!.timing = song.timing
+        
+        //erase timing & save dangerous values if different (no allowance >:()
+        if lyricsTextView.string != convertToOneBigString(song.lyrics) || songMinute.stringValue != "\(round(floor(song.songLength)/60))" || songSecond.stringValue != "\(song.songLength.truncatingRemainder(dividingBy: 60))" || firstMinute.stringValue != "\(round(floor(song.firstLyric)/60))" || firstSecond.stringValue != "\(song.firstLyric.truncatingRemainder(dividingBy: 60))" {
+            //set values
+            //1. lyrics
+            let everyLineBreakIsN = lyricsTextView.string.replacingOccurrences(of: "\r", with: "\n")
+            let lineArray = everyLineBreakIsN.split(separator: "\n")
+            var lyricArray:[Array<String>] = []
+            var z = 0
+            for x in 0...lineArray.count-1 {
+                if lineArray[x].split(separator: " ").count > 0 {
+                    lyricArray.append([])
+                    for y in 0...lineArray[x].split(separator: " ").count - 1 {
+                        lyricArray[z].append(String(lineArray[x].split(separator: " ")[y]))
+                    }
+                    z += 1
+                }
+            }
+            newSong!.lyrics = lyricArray
+            
+            //2. timing
+            newSong!.songLength = CGFloat(60*songMinute.floatValue + songSecond.floatValue)
+            newSong!.firstLyric = CGFloat(60*firstMinute.floatValue + firstSecond.floatValue)
+            
+            //erase timing
+            newSong!.resetTimingSize()
+        }
+        
+        //save safe values!
+        newSong!.title = titleTextField.stringValue
+        newSong!.artists = artistsTokenField.objectValue as! Array<String>
+        newSong!.topGradientColor = topGradientColorWell.color
+        newSong!.bottomGradientColor = bottomGradientColorWell.color
+        newSong!.fontColor = fontColorWell.color
+        newSong!.alternateFontColor = alternateColorWell.color
+        
+        //actually save
+        //Save song
+        var songBank = AppDelegate.songBank
+        songBank[songBank.firstIndex(of: song)!] = newSong!
+        AppDelegate.songBank = songBank
+        
+        //replace in collections
+        let collectionBank = AppDelegate.collectionBank
+        for collection in collectionBank {
+            //if contained in collection, replace
+            if collection.songs.contains(song) {
+                collection.songs[collection.songs.firstIndex(of: song)!] = newSong!
+            }
+        }
+        AppDelegate.collectionBank = collectionBank
+        
+        //refresh changes on cv item
+        self.sender.song = newSong!
+        self.sender.setupWithSong()
+        
+        return true
     }
     
     @IBAction func delete(_ sender: NSButton) {
+        //TODO: delete
     }
     
     @IBAction func onTitle(_ sender: NSTextField) {
-        //if not all filled out (waiting on others)
+        //make sure filled out
         if sender.stringValue == "" {
             saveAndQuitButton.isEnabled = false
             window!.title = "Please insert a name."
@@ -128,6 +210,36 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     }
     
     @IBAction func onDangerousLockChange(_ sender: NSButton) {
+        //make light if on, dark if off
+        if sender.state == .on {
+            //enable
+            lyricsLabel.textColor = .labelColor
+            songLengthLabel.textColor = .labelColor
+            firstLyricLabel.textColor = .labelColor
+            
+            lyricsTextView.textColor = .labelColor
+            lyricsTextView.isEditable = true
+            lyricsTextView.isSelectable = true
+            
+            songMinute.isEnabled = true
+            songSecond.isEnabled = true
+            firstMinute.isEnabled = true
+            firstSecond.isEnabled = true
+        } else {
+            //disable
+            lyricsLabel.textColor = .secondaryLabelColor
+            songLengthLabel.textColor = .secondaryLabelColor
+            firstLyricLabel.textColor = .secondaryLabelColor
+            
+            lyricsTextView.textColor = .secondaryLabelColor
+            lyricsTextView.isEditable = false
+            lyricsTextView.isSelectable = false
+            
+            songMinute.isEnabled = false
+            songSecond.isEnabled = false
+            firstMinute.isEnabled = false
+            firstSecond.isEnabled = false
+        }
     }
     
     

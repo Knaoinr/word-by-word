@@ -46,10 +46,14 @@ class TimingViewController: NSViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var acceptsFirstResponder: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
+
         //setup colors
         (view as! ColorView).changeGradientColor(start: song.topGradientColor, end: song.bottomGradientColor)
         twoAboveLabel.textColor = song.fontColor
@@ -88,11 +92,21 @@ class TimingViewController: NSViewController {
         timeSlider.maxValue = Double(song.songLength)
     }
     
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        if acceptsFirstResponder {
+            view.window!.makeFirstResponder(self)
+        }
+    }
+    
     // MARK: - Action response methods
     
     override func keyDown(with event: NSEvent) {
         if event.keyCode == 125 {
             onDownArrow()
+        } else {
+            super.keyDown(with: event)
         }
     }
     
@@ -165,7 +179,6 @@ class TimingViewController: NSViewController {
     }
     
     @IBAction func onEditViewChoice(_ sender: NSSegmentedControl) {
-        print("beep")
     }
     
     //Timing + down arrow

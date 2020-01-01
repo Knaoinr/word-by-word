@@ -217,10 +217,10 @@
                                 <textView editable="NO" selectable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="IVT-wh-a77">
                                     <rect key="frame" x="0.0" y="0.0" width="489" height="201"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <size key="minSize" width="489" height="201"/>
-                                    <size key="maxSize" width="489" height="10000000"/>
+                                    <size key="maxSize" width="491" height="10000000"/>
                                     <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 </textView>
                             </subviews>

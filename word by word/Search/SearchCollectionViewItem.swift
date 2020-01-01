@@ -35,6 +35,9 @@ class SearchCollectionViewItem: NSCollectionViewItem {
         // Do view setup here.
         
         setupWithSong()
+        
+        //make sure to do this when editing window is closed (song is changed)
+        editingWindowController = EditingWindowController(song: song, sender: self)
     }
     
     //sets up UI for song; can be recalled when song changed
@@ -48,14 +51,12 @@ class SearchCollectionViewItem: NSCollectionViewItem {
         let _ = artistLabel.stringValue.popLast()
         titleLabel.textColor = song.fontColor
         artistLabel.textColor = song.fontColor
-        
-        editingWindowController = EditingWindowController(song)
     }
     
     @IBAction func onSettingsPress(_ sender: NSButton) {
         //if closed, recreate; else pull up already open window
         if editingWindowController == nil {
-            editingWindowController = EditingWindowController(song)
+            editingWindowController = EditingWindowController(song: song, sender: self)
         }
         editingWindowController!.window?.makeKeyAndOrderFront(self)
     }
