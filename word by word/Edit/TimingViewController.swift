@@ -18,6 +18,10 @@ class TimingViewController: NSViewController {
     var oneBelowIndex:[Int]?
     var twoBelowIndex:[Int]?
     
+    var isEditingMode = true
+    var isOverwriteMode = true
+    var interval = 0.05
+    
     @IBOutlet weak var startLabel: NSTextField!
     @IBOutlet weak var endLabel: NSTextField!
     @IBOutlet weak var timeSlider: NSSlider!
@@ -29,6 +33,9 @@ class TimingViewController: NSViewController {
     @IBOutlet weak var mainLabel: NSTextField!
     @IBOutlet weak var oneBelowLabel: NSTextField!
     @IBOutlet weak var twoBelowLabel: NSTextField!
+    
+    @IBOutlet weak var overwriteChangesRadio: NSButton!
+    @IBOutlet weak var averageChangesRadio: NSButton!
     
     var timer = Timer()
     
@@ -113,9 +120,40 @@ class TimingViewController: NSViewController {
     //Restart/done buttons
     
     @IBAction func restart(_ sender: NSButton) {
+        //completely new VC
+        view.window!.contentViewController = TimingViewController(song)
     }
     
     @IBAction func done(_ sender: NSButton) {
+        //save unsaved changes, then save song
+        newTiming = combineTimingChanges()
+        justEditedTiming = newTiming
+        
+        let newSong = Song(title: song.title, artists: song.artists, lyrics: song.lyrics, songLength: song.songLength, firstLyric: song.firstLyric)
+        newSong.setColors(topGradientColor: song.topGradientColor, bottomGradientColor: song.bottomGradientColor, fontColor: song.fontColor)
+        newSong.alternateFontColor = song.alternateFontColor
+        newSong.timing = newTiming
+        
+        //save to bank
+        var songBank = AppDelegate.songBank
+        songBank[songBank.firstIndex(of: song)!] = newSong
+        AppDelegate.songBank = songBank
+        
+        //replace in collections
+        let collectionBank = AppDelegate.collectionBank
+        for collection in collectionBank {
+            //if contained in collection, replace
+            if collection.songs.contains(song) {
+                collection.songs[collection.songs.firstIndex(of: song)!] = newSong
+            }
+        }
+        AppDelegate.collectionBank = collectionBank
+        
+        //refresh data in case search window is open
+        (AppDelegate.mainWindow!.windowController! as! HomeWindowController).searchViewController.collectionView?.reloadData()
+        
+        //close window
+        view.window!.performClose(self)
     }
     
     //Playback controls
@@ -124,7 +162,7 @@ class TimingViewController: NSViewController {
         //if paused, play
         if playPauseButton.image!.name() == NSImage.touchBarPlayTemplateName {
             playPauseButton.image = NSImage(named: NSImage.touchBarPauseTemplateName)
-            timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(updatePlay), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(updatePlay), userInfo: nil, repeats: true)
         } else { //else, stop
             playPauseButton.image = NSImage(named: NSImage.touchBarPlayTemplateName)
             timer.invalidate()
@@ -132,9 +170,64 @@ class TimingViewController: NSViewController {
     }
     
     @IBAction func onDiscardChanges(_ sender: NSButton) {
+        //set to previous version
+        justEditedTiming = newTiming
+        //go to first lyric again
+        //place text in labels
+        twoAboveLabel.stringValue = ""
+        oneAboveLabel.stringValue = ""
+        mainLabel.stringValue = song.lyrics[0][0]
+        if getNextWordIndex(0, 0) != nil {
+            oneBelowIndex = getNextWordIndex(0, 0)!
+            oneBelowLabel.stringValue = song.lyrics[oneBelowIndex![0]][oneBelowIndex![1]]
+            
+            if getNextWordIndex(oneBelowIndex![0], oneBelowIndex![1]) != nil {
+                twoBelowIndex = getNextWordIndex(oneBelowIndex![0], oneBelowIndex![1])!
+                twoBelowLabel.stringValue = song!.lyrics[twoBelowIndex![0]][twoBelowIndex![1]]
+            } else {
+                twoBelowIndex = nil
+                twoBelowLabel.stringValue = ""
+            }
+            
+        } else {
+            oneBelowIndex = nil
+            oneBelowLabel.stringValue = ""
+        }
+        
+        //starting point
+        timeSlider.doubleValue = Double(song.firstLyric)
+        startLabel.stringValue = "\(Double(round(10*song.firstLyric)/10))"
     }
     
     @IBAction func onSaveChanges(_ sender: NSButton) {
+        //set to overwritten or averaged changes
+        newTiming = combineTimingChanges()
+        justEditedTiming = newTiming
+        //go to first lyric again
+        //place text in labels
+        twoAboveLabel.stringValue = ""
+        oneAboveLabel.stringValue = ""
+        mainLabel.stringValue = song.lyrics[0][0]
+        if getNextWordIndex(0, 0) != nil {
+            oneBelowIndex = getNextWordIndex(0, 0)!
+            oneBelowLabel.stringValue = song.lyrics[oneBelowIndex![0]][oneBelowIndex![1]]
+            
+            if getNextWordIndex(oneBelowIndex![0], oneBelowIndex![1]) != nil {
+                twoBelowIndex = getNextWordIndex(oneBelowIndex![0], oneBelowIndex![1])!
+                twoBelowLabel.stringValue = song!.lyrics[twoBelowIndex![0]][twoBelowIndex![1]]
+            } else {
+                twoBelowIndex = nil
+                twoBelowLabel.stringValue = ""
+            }
+            
+        } else {
+            oneBelowIndex = nil
+            oneBelowLabel.stringValue = ""
+        }
+        
+        //starting point
+        timeSlider.doubleValue = Double(song.firstLyric)
+        startLabel.stringValue = "\(Double(round(10*song.firstLyric)/10))"
     }
 
     @IBAction func onSlide(_ sender: NSSlider) {
@@ -145,7 +238,12 @@ class TimingViewController: NSViewController {
         startLabel.stringValue = "\(Double(round(10*sender.doubleValue)/10))"
         
         //put correct lyrics in place
-        let mainIndex = getWordAtTime(CGFloat(sender.doubleValue))
+        var mainIndex:[Int] = []
+        if isEditingMode {
+            mainIndex = getWordAtTime(CGFloat(sender.doubleValue), in: justEditedTiming)
+        } else {
+            mainIndex = getWordAtTime(CGFloat(sender.doubleValue), in: combineTimingChanges())
+        }
         mainLabel.stringValue = song.lyrics[mainIndex[0]][mainIndex[1]]
         if let nextIndex = getNextWordIndex(mainIndex[0], mainIndex[1]) {
             oneBelowIndex = nextIndex
@@ -179,11 +277,25 @@ class TimingViewController: NSViewController {
     }
     
     @IBAction func onEditViewChoice(_ sender: NSSegmentedControl) {
+        isEditingMode = sender.isSelected(forSegment: 0)
     }
     
+    @IBAction func onHalfSpeedChange(_ sender: NSButton) {
+        if sender.state == .on {
+            interval = 0.1
+        } else {
+            interval = 0.05
+        }
+    }
+    
+    @IBAction func onChangeStyleChange(_ sender: NSButton) {
+        isOverwriteMode = (sender.title == "Overwrite changes")
+    }
+    
+
     //Timing + down arrow
     
-    //On each 0.05s of timer on
+    //On each 0.05s of timer on (or 0.1 if half speed)
     @objc func updatePlay() {
         //change slider
         timeSlider.doubleValue += 0.05
@@ -195,10 +307,34 @@ class TimingViewController: NSViewController {
             timeSlider.doubleValue = timeSlider.maxValue
             startLabel.stringValue = "\(Double(round(10*song.songLength)/10))"
         }
+        
+        //if in viewing mode
+        if !isEditingMode {
+            //automatically go down at the time
+            if oneBelowIndex != nil {
+                if abs(CGFloat(timeSlider.doubleValue) - newTiming[oneBelowIndex![0]][oneBelowIndex![1]]) < 0.025 {
+                    //move everything up
+                    twoAboveLabel.stringValue = oneAboveLabel.stringValue
+                    oneAboveLabel.stringValue = mainLabel.stringValue
+                    mainLabel.stringValue = oneBelowLabel.stringValue
+                    oneBelowLabel.stringValue = twoBelowLabel.stringValue
+                    oneBelowIndex = twoBelowIndex
+                    if twoBelowIndex != nil {
+                        if getNextWordIndex(twoBelowIndex![0], twoBelowIndex![1]) != nil {
+                            twoBelowIndex = getNextWordIndex(twoBelowIndex![0], twoBelowIndex![1])!
+                            twoBelowLabel.stringValue = song.lyrics[twoBelowIndex![0]][twoBelowIndex![1]]
+                        } else {
+                            twoBelowIndex = nil
+                            twoBelowLabel.stringValue = ""
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func onDownArrow() {
-        if oneBelowIndex != nil {
+        if oneBelowIndex != nil && isEditingMode {
             //save timing for one down
             justEditedTiming[oneBelowIndex![0]][oneBelowIndex![1]] = CGFloat(timeSlider.floatValue)
             
@@ -243,17 +379,37 @@ class TimingViewController: NSViewController {
         }
     }
     
-    func getWordAtTime(_ time: CGFloat) -> [Int] {
+    func getWordAtTime(_ time: CGFloat, in timingSystem: [Array<CGFloat>]) -> [Int] {
         if time <= song.firstLyric {
             return [0, 0]
         }
         
         //loop through starting at end
-        var index = [newTiming.count-1, newTiming[newTiming.count-1].count-1]
-        while(newTiming[index[0]][index[1]] >= time) {
+        var index = [timingSystem.count-1, timingSystem[timingSystem.count-1].count-1]
+        while(timingSystem[index[0]][index[1]] >= time) {
             index = getLastWordIndex(index[0], index[1])!
         }
         return index
+    }
+    
+    //doesn't change anything (hopefully)
+    func combineTimingChanges() -> [Array<CGFloat>] {
+        //if overwrite mode, return new timing
+        if isOverwriteMode {
+            return justEditedTiming
+        } else {
+            //average out the two
+            var averagedTiming = newTiming
+            
+            for x in 0...averagedTiming.count-1 {
+                for y in 0...averagedTiming[x].count-1 {
+                    averagedTiming[x][y] += justEditedTiming[x][y]
+                    averagedTiming[x][y] /= 2
+                }
+            }
+            
+            return averagedTiming
+        }
     }
 
 }

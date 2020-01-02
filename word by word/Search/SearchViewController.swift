@@ -14,6 +14,8 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
     
     var backView:NSView?
     
+    @IBOutlet weak var searchField: NSSearchField!
+    @IBOutlet weak var searchFieldCell: NSSearchFieldCell! // TODO: make bigger icons
     @IBOutlet weak var collectionView: NSCollectionView!
     let dataSource = SearchDataSource()
     
@@ -35,9 +37,10 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
         // Do view setup here.
         
         view.setFrameSize(NSSize(width: AppDelegate.mainWindow!.frame.width, height: AppDelegate.mainWindow!.frame.height - 20))
-        
+
         collectionView.backgroundColors = [.clear]
 
+        //put data in
         collectionView.dataSource = dataSource
         collectionView.delegate = self
         

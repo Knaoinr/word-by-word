@@ -30,6 +30,8 @@
 		82DEB47423B6F21B0068CA11 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */; };
 		82DEB47723B7B2930068CA11 /* SearchCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */; };
 		82DEB47823B7B2930068CA11 /* SearchCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82DEB47623B7B2930068CA11 /* SearchCollectionViewItem.xib */; };
+		82FDE6C123BD847A0099A566 /* ViewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDE6BF23BD84790099A566 /* ViewSongViewController.swift */; };
+		82FDE6C223BD847A0099A566 /* ViewSongViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FDE6C023BD84790099A566 /* ViewSongViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewItem.swift; sourceTree = "<group>"; };
 		82DEB47623B7B2930068CA11 /* SearchCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionViewItem.xib; sourceTree = "<group>"; };
+		82FDE6BF23BD84790099A566 /* ViewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSongViewController.swift; sourceTree = "<group>"; };
+		82FDE6C023BD84790099A566 /* ViewSongViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewSongViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 				8201507B23B2D66200E9FCD2 /* Add */,
 				8201508823B5AB2700E9FCD2 /* Edit */,
 				829C2F5423B6E728000CE4F0 /* Search */,
+				82FDE6C323BD84880099A566 /* View */,
 				8201508023B542F800E9FCD2 /* Song.swift */,
 				8201508223B54C3D00E9FCD2 /* SongCollection.swift */,
 				8201507023B2D21C00E9FCD2 /* ColorView.swift */,
@@ -142,6 +147,15 @@
 				8215F8EB23B9488200088F23 /* ScrollessScroller.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		82FDE6C323BD84880099A566 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82FDE6BF23BD84790099A566 /* ViewSongViewController.swift */,
+				82FDE6C023BD84790099A566 /* ViewSongViewController.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +218,7 @@
 			files = (
 				8215F8F023B988DC00088F23 /* EditingWindowController.xib in Resources */,
 				8201506423B2D08800E9FCD2 /* Assets.xcassets in Resources */,
+				82FDE6C223BD847A0099A566 /* ViewSongViewController.xib in Resources */,
 				82DEB47823B7B2930068CA11 /* SearchCollectionViewItem.xib in Resources */,
 				8201507F23B5159700E9FCD2 /* AddSecondViewController.xib in Resources */,
 				8201507623B2D21D00E9FCD2 /* AddWindowController.xib in Resources */,
@@ -222,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				829C2F5223B6E6FF000CE4F0 /* SearchViewController.swift in Sources */,
+				82FDE6C123BD847A0099A566 /* ViewSongViewController.swift in Sources */,
 				82DEB47423B6F21B0068CA11 /* SearchDataSource.swift in Sources */,
 				8201508123B542F800E9FCD2 /* Song.swift in Sources */,
 				8201507423B2D21D00E9FCD2 /* ColorView.swift in Sources */,

@@ -7,10 +7,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TimingViewController" customModule="word_by_word" customModuleProvider="target">
             <connections>
+                <outlet property="averageChangesRadio" destination="KmG-bE-fM1" id="fUk-mI-6Fm"/>
                 <outlet property="endLabel" destination="FMa-lf-1bb" id="acU-ry-nBH"/>
                 <outlet property="mainLabel" destination="gmq-74-MGP" id="Q1U-kM-2V4"/>
                 <outlet property="oneAboveLabel" destination="MPm-0f-8hs" id="yfh-zM-oQk"/>
                 <outlet property="oneBelowLabel" destination="DXo-CU-qsf" id="d56-5F-WJr"/>
+                <outlet property="overwriteChangesRadio" destination="Hzg-gu-dPT" id="WS4-a6-jxc"/>
                 <outlet property="playPauseButton" destination="aMp-2U-Orf" id="mEU-5I-vi1"/>
                 <outlet property="startLabel" destination="LYg-NE-CSK" id="pD4-9j-JjB"/>
                 <outlet property="timeSlider" destination="AHf-Ki-U3A" id="scZ-dU-VbJ"/>
@@ -197,6 +199,29 @@ Gw
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="onHalfSpeedChange:" target="-2" id="TQO-V2-J3f"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hzg-gu-dPT">
+                    <rect key="frame" x="479" y="358" width="136" height="18"/>
+                    <buttonCell key="cell" type="radio" title="Overwrite changes" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="sZw-oJ-3u9">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onChangeStyleChange:" target="-2" id="YLV-oF-fNq"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KmG-bE-fM1">
+                    <rect key="frame" x="479" y="336" width="126" height="18"/>
+                    <buttonCell key="cell" type="radio" title="Average changes" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="rWo-V0-Anw">
+                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onChangeStyleChange:" target="-2" id="FJB-O3-oEx"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
@@ -231,6 +256,7 @@ Gw
                 <constraint firstItem="AHf-Ki-U3A" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Shz-9x-5Vd"/>
                 <constraint firstItem="FMa-lf-1bb" firstAttribute="leading" secondItem="AHf-Ki-U3A" secondAttribute="trailing" constant="10" id="TGn-lA-brE"/>
                 <constraint firstAttribute="bottom" secondItem="69q-4S-46J" secondAttribute="bottom" constant="10" id="TXL-dF-IcU"/>
+                <constraint firstItem="Hzg-gu-dPT" firstAttribute="centerY" secondItem="a17-9U-zmk" secondAttribute="centerY" id="V2w-xc-Jfp"/>
                 <constraint firstItem="DXo-CU-qsf" firstAttribute="top" secondItem="gmq-74-MGP" secondAttribute="bottom" constant="-1" id="Z9u-vM-Gz0"/>
                 <constraint firstItem="9l1-Qf-nDh" firstAttribute="width" secondItem="bn1-Tp-raD" secondAttribute="width" id="bMP-wm-Gf2"/>
                 <constraint firstItem="8W3-RV-UZH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="bYu-9c-Sxa"/>
@@ -239,10 +265,13 @@ Gw
                 <constraint firstItem="8W3-RV-UZH" firstAttribute="top" secondItem="2zg-ca-ulJ" secondAttribute="bottom" constant="10" id="cm5-Zj-bWD"/>
                 <constraint firstItem="FMa-lf-1bb" firstAttribute="centerY" secondItem="LYg-NE-CSK" secondAttribute="centerY" id="cwC-wl-sgZ"/>
                 <constraint firstItem="gmq-74-MGP" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" constant="15" id="dtw-dJ-aA9"/>
+                <constraint firstItem="Hzg-gu-dPT" firstAttribute="leading" secondItem="a17-9U-zmk" secondAttribute="trailing" constant="22" id="har-hN-xua"/>
                 <constraint firstItem="aMp-2U-Orf" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="hiL-sI-fe0"/>
                 <constraint firstItem="AHf-Ki-U3A" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="50" id="jdl-ko-iaI"/>
                 <constraint firstItem="lct-se-YfS" firstAttribute="leading" secondItem="69q-4S-46J" secondAttribute="trailing" constant="10" id="jdy-XO-y72"/>
+                <constraint firstItem="KmG-bE-fM1" firstAttribute="leading" secondItem="Hzg-gu-dPT" secondAttribute="leading" id="kOy-Pr-Jhz"/>
                 <constraint firstItem="MPm-0f-8hs" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="oZu-MW-tah"/>
+                <constraint firstItem="KmG-bE-fM1" firstAttribute="top" secondItem="Hzg-gu-dPT" secondAttribute="bottom" constant="6" id="rk6-dC-UEh"/>
                 <constraint firstAttribute="trailing" secondItem="nG1-J8-7bV" secondAttribute="trailing" id="s9Z-Ju-p3S"/>
                 <constraint firstItem="AHf-Ki-U3A" firstAttribute="leading" secondItem="LYg-NE-CSK" secondAttribute="trailing" constant="10" id="tWQ-81-snS"/>
                 <constraint firstAttribute="trailing" secondItem="DXo-CU-qsf" secondAttribute="trailing" id="ypC-V6-bGg"/>

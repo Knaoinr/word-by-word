@@ -8,6 +8,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="SearchViewController" customModule="word_by_word" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="2al-EZ-LGP" id="5Ux-Bi-HXX"/>
+                <outlet property="searchField" destination="mAa-rh-xVy" id="EZD-jn-GNu"/>
+                <outlet property="searchFieldCell" destination="QKA-zU-rPL" id="NYc-Yv-Z9x"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>

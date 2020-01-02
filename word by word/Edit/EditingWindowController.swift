@@ -183,7 +183,28 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     }
     
     @IBAction func delete(_ sender: NSButton) {
-        //TODO: delete
+        //delete song from song bank
+        var songBank = AppDelegate.songBank
+        songBank.removeAll { (testSong) -> Bool in
+            return song == testSong
+        }
+        AppDelegate.songBank = songBank
+        
+        //and collections
+        let collectionBank = AppDelegate.collectionBank
+        for collection in collectionBank {
+            //if contained in collection, replace
+            if collection.songs.contains(song) {
+                collection.songs.removeAll { (testSong) -> Bool in
+                    return song == testSong
+                }
+            }
+        }
+        AppDelegate.collectionBank = collectionBank
+        
+        //refresh cv & close window
+        (AppDelegate.mainWindow!.windowController! as! HomeWindowController).searchViewController.onSearch((AppDelegate.mainWindow!.windowController! as! HomeWindowController).searchViewController.searchField)
+        cancel(sender)
     }
     
     @IBAction func onTitle(_ sender: NSTextField) {
@@ -225,6 +246,8 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
             songSecond.isEnabled = true
             firstMinute.isEnabled = true
             firstSecond.isEnabled = true
+            
+            deleteSongButton.isEnabled = true
         } else {
             //disable
             lyricsLabel.textColor = .secondaryLabelColor
@@ -239,6 +262,8 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
             songSecond.isEnabled = false
             firstMinute.isEnabled = false
             firstSecond.isEnabled = false
+            
+            deleteSongButton.isEnabled = false
         }
     }
     
