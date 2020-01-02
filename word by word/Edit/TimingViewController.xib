@@ -116,9 +116,8 @@ DQ
                     <buttonCell key="cell" type="push" title="Revert" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ePs-yI-pRj">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
-                        <string key="keyEquivalent" base64-UTF8="YES">
-Gw
-</string>
+                        <string key="keyEquivalent">r</string>
+                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                     </buttonCell>
                     <connections>
                         <action selector="restart:" target="-2" id="EYU-gF-yjx"/>
@@ -223,6 +222,18 @@ Gw
                         <action selector="onChangeStyleChange:" target="-2" id="FJB-O3-oEx"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6wm-50-bLD">
+                    <rect key="frame" x="522" y="41" width="103" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="52" id="2v5-08-ryz"/>
+                        <constraint firstAttribute="width" constant="99" id="Aec-Uc-rWf"/>
+                    </constraints>
+                    <textFieldCell key="cell" alignment="right" title="You may need to refresh any open pages to see changes." id="bRI-b8-cbM">
+                        <font key="font" metaFont="system" size="10"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
             <constraints>
                 <constraint firstItem="aMp-2U-Orf" firstAttribute="leading" secondItem="bn1-Tp-raD" secondAttribute="trailing" constant="10" id="12K-Il-R3d"/>
@@ -232,6 +243,7 @@ Gw
                 <constraint firstAttribute="trailing" secondItem="m2j-0U-hvj" secondAttribute="trailing" id="3SH-I2-omI"/>
                 <constraint firstItem="gmq-74-MGP" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="4oh-cx-Q4L"/>
                 <constraint firstItem="2zg-ca-ulJ" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="514-nI-5l4"/>
+                <constraint firstAttribute="trailing" secondItem="6wm-50-bLD" secondAttribute="trailing" constant="10" id="5Mf-Q7-gdJ"/>
                 <constraint firstAttribute="trailing" secondItem="lct-se-YfS" secondAttribute="trailing" constant="10" id="5Oe-Wo-gd1"/>
                 <constraint firstItem="bn1-Tp-raD" firstAttribute="centerY" secondItem="g77-rb-nxz" secondAttribute="centerY" id="6SX-AB-yl6"/>
                 <constraint firstItem="DXo-CU-qsf" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="6Wb-e5-zhE"/>
@@ -257,6 +269,7 @@ Gw
                 <constraint firstItem="FMa-lf-1bb" firstAttribute="leading" secondItem="AHf-Ki-U3A" secondAttribute="trailing" constant="10" id="TGn-lA-brE"/>
                 <constraint firstAttribute="bottom" secondItem="69q-4S-46J" secondAttribute="bottom" constant="10" id="TXL-dF-IcU"/>
                 <constraint firstItem="Hzg-gu-dPT" firstAttribute="centerY" secondItem="a17-9U-zmk" secondAttribute="centerY" id="V2w-xc-Jfp"/>
+                <constraint firstItem="lct-se-YfS" firstAttribute="top" secondItem="6wm-50-bLD" secondAttribute="bottom" constant="10" id="WaL-yX-rWf"/>
                 <constraint firstItem="DXo-CU-qsf" firstAttribute="top" secondItem="gmq-74-MGP" secondAttribute="bottom" constant="-1" id="Z9u-vM-Gz0"/>
                 <constraint firstItem="9l1-Qf-nDh" firstAttribute="width" secondItem="bn1-Tp-raD" secondAttribute="width" id="bMP-wm-Gf2"/>
                 <constraint firstItem="8W3-RV-UZH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="10" id="bYu-9c-Sxa"/>

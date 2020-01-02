@@ -76,20 +76,20 @@ class Song : Equatable, Codable {
     
     var bottomGradientColor: NSColor {
         get {
-            return NSColor(calibratedRed: bottomGradientComponents[0], green: bottomGradientComponents[1], blue: bottomGradientComponents[2], alpha: bottomGradientComponents[3])
+            return NSColor(calibratedRed: bottomGradientComponents[0], green: bottomGradientComponents[1], blue: bottomGradientComponents[2], alpha: bottomGradientComponents[3]).usingColorSpace(.genericRGB)!
         }
         set (settingColor) {
-            let color = settingColor.usingColorSpace(.deviceRGB)
+            let color = settingColor.usingColorSpace(.genericRGB)
             bottomGradientComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
         }
     }
     
     var fontColor: NSColor {
         get {
-            return NSColor(calibratedRed: fontComponents[0], green: fontComponents[1], blue: fontComponents[2], alpha: fontComponents[3])
+            return NSColor(calibratedRed: fontComponents[0], green: fontComponents[1], blue: fontComponents[2], alpha: fontComponents[3]).usingColorSpace(.genericRGB)!
         }
         set (settingColor) {
-            let color = settingColor.usingColorSpace(.deviceRGB)
+            let color = settingColor.usingColorSpace(.genericRGB)
             fontComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
         }
     }
@@ -97,14 +97,14 @@ class Song : Equatable, Codable {
     var alternateFontColor: NSColor? {
         get {
             if alternateFontComponents != nil {
-                return NSColor(calibratedRed: alternateFontComponents![0], green: alternateFontComponents![1], blue: alternateFontComponents![2], alpha: alternateFontComponents![3])
+                return NSColor(calibratedRed: alternateFontComponents![0], green: alternateFontComponents![1], blue: alternateFontComponents![2], alpha: alternateFontComponents![3]).usingColorSpace(.genericRGB)!
             } else {
                 return nil
             }
         }
         set (settingColor) {
             if settingColor != nil {
-                let color = settingColor!.usingColorSpace(.deviceRGB)
+                let color = settingColor!.usingColorSpace(.genericRGB)
                 alternateFontComponents = [color!.redComponent, color!.greenComponent, color!.blueComponent, color!.alphaComponent]
             } else {
                 alternateFontComponents = nil

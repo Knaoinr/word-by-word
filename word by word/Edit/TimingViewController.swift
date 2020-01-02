@@ -312,7 +312,7 @@ class TimingViewController: NSViewController {
         if !isEditingMode {
             //automatically go down at the time
             if oneBelowIndex != nil {
-                if abs(CGFloat(timeSlider.doubleValue) - newTiming[oneBelowIndex![0]][oneBelowIndex![1]]) < 0.025 {
+                if abs(CGFloat(timeSlider.doubleValue) - combineTimingChanges()[oneBelowIndex![0]][oneBelowIndex![1]]) < 0.025 {
                     //move everything up
                     twoAboveLabel.stringValue = oneAboveLabel.stringValue
                     oneAboveLabel.stringValue = mainLabel.stringValue
@@ -403,8 +403,7 @@ class TimingViewController: NSViewController {
             
             for x in 0...averagedTiming.count-1 {
                 for y in 0...averagedTiming[x].count-1 {
-                    averagedTiming[x][y] += justEditedTiming[x][y]
-                    averagedTiming[x][y] /= 2
+                    averagedTiming[x][y] = (newTiming[x][y] + justEditedTiming[x][y]) / 2
                 }
             }
             

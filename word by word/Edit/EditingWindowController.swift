@@ -79,9 +79,9 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         colorView.changeGradientColor(start: song.topGradientColor, end: song.bottomGradientColor)
         letter.textColor = song.fontColor
         lyricsTextView.string = convertToOneBigString(song.lyrics)
-        songMinute.stringValue = "\(round(floor(song.songLength)/60))"
+        songMinute.stringValue = "\(floor(song.songLength/60))"
         songSecond.stringValue = "\(song.songLength.truncatingRemainder(dividingBy: 60))"
-        firstMinute.stringValue = "\(round(floor(song.firstLyric)/60))"
+        firstMinute.stringValue = "\(floor(song.firstLyric/60))"
         firstSecond.stringValue = "\(song.firstLyric.truncatingRemainder(dividingBy: 60))"
     }
     
@@ -125,7 +125,7 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         newSong!.timing = song.timing
         
         //erase timing & save dangerous values if different (no allowance >:()
-        if lyricsTextView.string != convertToOneBigString(song.lyrics) || songMinute.stringValue != "\(round(floor(song.songLength)/60))" || songSecond.stringValue != "\(song.songLength.truncatingRemainder(dividingBy: 60))" || firstMinute.stringValue != "\(round(floor(song.firstLyric)/60))" || firstSecond.stringValue != "\(song.firstLyric.truncatingRemainder(dividingBy: 60))" {
+        if lyricsTextView.string != convertToOneBigString(song.lyrics) || songMinute.stringValue != "\(floor(song.songLength/60))" || songSecond.stringValue != "\(song.songLength.truncatingRemainder(dividingBy: 60))" || firstMinute.stringValue != "\(floor(song.firstLyric/60))" || firstSecond.stringValue != "\(song.firstLyric.truncatingRemainder(dividingBy: 60))" {
             //set values
             //1. lyrics
             let everyLineBreakIsN = lyricsTextView.string.replacingOccurrences(of: "\r", with: "\n")

@@ -30,8 +30,8 @@
 		82DEB47423B6F21B0068CA11 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */; };
 		82DEB47723B7B2930068CA11 /* SearchCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */; };
 		82DEB47823B7B2930068CA11 /* SearchCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82DEB47623B7B2930068CA11 /* SearchCollectionViewItem.xib */; };
-		82FDE6C123BD847A0099A566 /* ViewSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDE6BF23BD84790099A566 /* ViewSongViewController.swift */; };
-		82FDE6C223BD847A0099A566 /* ViewSongViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FDE6C023BD84790099A566 /* ViewSongViewController.xib */; };
+		82FDE6C623BD87040099A566 /* ViewSongWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FDE6C423BD87040099A566 /* ViewSongWindowController.swift */; };
+		82FDE6C723BD87040099A566 /* ViewSongWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82FDE6C523BD87040099A566 /* ViewSongWindowController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,8 +61,8 @@
 		82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewItem.swift; sourceTree = "<group>"; };
 		82DEB47623B7B2930068CA11 /* SearchCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionViewItem.xib; sourceTree = "<group>"; };
-		82FDE6BF23BD84790099A566 /* ViewSongViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSongViewController.swift; sourceTree = "<group>"; };
-		82FDE6C023BD84790099A566 /* ViewSongViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewSongViewController.xib; sourceTree = "<group>"; };
+		82FDE6C423BD87040099A566 /* ViewSongWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSongWindowController.swift; sourceTree = "<group>"; };
+		82FDE6C523BD87040099A566 /* ViewSongWindowController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewSongWindowController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,8 +152,8 @@
 		82FDE6C323BD84880099A566 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				82FDE6BF23BD84790099A566 /* ViewSongViewController.swift */,
-				82FDE6C023BD84790099A566 /* ViewSongViewController.xib */,
+				82FDE6C423BD87040099A566 /* ViewSongWindowController.swift */,
+				82FDE6C523BD87040099A566 /* ViewSongWindowController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,7 +218,6 @@
 			files = (
 				8215F8F023B988DC00088F23 /* EditingWindowController.xib in Resources */,
 				8201506423B2D08800E9FCD2 /* Assets.xcassets in Resources */,
-				82FDE6C223BD847A0099A566 /* ViewSongViewController.xib in Resources */,
 				82DEB47823B7B2930068CA11 /* SearchCollectionViewItem.xib in Resources */,
 				8201507F23B5159700E9FCD2 /* AddSecondViewController.xib in Resources */,
 				8201507623B2D21D00E9FCD2 /* AddWindowController.xib in Resources */,
@@ -226,6 +225,7 @@
 				8201508723B5AB1700E9FCD2 /* TimingViewController.xib in Resources */,
 				8201506723B2D08800E9FCD2 /* MainMenu.xib in Resources */,
 				829C2F5323B6E6FF000CE4F0 /* SearchViewController.xib in Resources */,
+				82FDE6C723BD87040099A566 /* ViewSongWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,10 +237,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				829C2F5223B6E6FF000CE4F0 /* SearchViewController.swift in Sources */,
-				82FDE6C123BD847A0099A566 /* ViewSongViewController.swift in Sources */,
 				82DEB47423B6F21B0068CA11 /* SearchDataSource.swift in Sources */,
 				8201508123B542F800E9FCD2 /* Song.swift in Sources */,
 				8201507423B2D21D00E9FCD2 /* ColorView.swift in Sources */,
+				82FDE6C623BD87040099A566 /* ViewSongWindowController.swift in Sources */,
 				8201508323B54C3D00E9FCD2 /* SongCollection.swift in Sources */,
 				8201507923B2D4AE00E9FCD2 /* HomeWindowController.swift in Sources */,
 				8215F8EF23B988DC00088F23 /* EditingWindowController.swift in Sources */,

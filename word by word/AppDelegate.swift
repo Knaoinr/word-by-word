@@ -16,6 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     // MARK: - Objects
     
     static var mainWindow: NSWindow?
+    static var playWindow: NSWindow?
     let mainWindowController = HomeWindowController(windowNibName: "HomeWindowController")
 
 
