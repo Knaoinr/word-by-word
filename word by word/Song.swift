@@ -8,7 +8,8 @@
 
 import Cocoa
 
-class Song : Equatable, Codable {
+class Song : NSObject, Codable, NSPasteboardWriting, NSPasteboardReading {
+    
     
     // MARK: - Variables
     
@@ -25,9 +26,11 @@ class Song : Equatable, Codable {
     private var fontComponents:[CGFloat] = [0,0,0,0]
     private var alternateFontComponents:[CGFloat]?
     
-    // MARK: - Methods
+    // MARK: - Protocol
     
     init(title:String, artists:[String], lyrics:[Array<String>], songLength:CGFloat, firstLyric:CGFloat) {
+        super.init()
+        
         self.title = title
         self.artists = artists
         self.lyrics = lyrics
@@ -38,12 +41,55 @@ class Song : Equatable, Codable {
     }
     
     static func == (lhs: Song, rhs: Song) -> Bool {
-        if lhs.title == rhs.title && lhs.artists == rhs.artists {
-            return true
+        if lhs.title == rhs.title && lhs.artists.count == rhs.artists.count {
+            var matching = true
+            for index in 0...lhs.artists.count-1 {
+                if lhs.artists[index] != rhs.artists[index] {
+                    matching = false
+                }
+            }
+            return matching
         } else {
             return false
         }
     }
+    
+    required convenience init?(pasteboardPropertyList propertyList: Any, ofType type: NSPasteboard.PasteboardType) {
+        //decode from dictionary
+        guard let dict = propertyList as? NSDictionary else { return nil }
+        self.init(title: dict["title"] as! String, artists: dict["artists"] as! [String], lyrics: dict["lyrics"] as! [Array<String>], songLength: dict["songLength"] as! CGFloat, firstLyric: dict["firstLyric"] as! CGFloat)
+        self.topGradientComponents = dict["topGradientComponents"] as! [CGFloat]
+        self.bottomGradientComponents = dict["bottomGradientComponents"] as! [CGFloat]
+        self.fontComponents = dict["fontComponents"] as! [CGFloat]
+        self.alternateFontComponents = dict["alternateFontComponents"] as? [CGFloat]
+        self.timing = dict["timing"] as! [Array<CGFloat>]
+    }
+    
+    func writingOptions(forType type: NSPasteboard.PasteboardType, pasteboard: NSPasteboard) -> NSPasteboard.WritingOptions {
+        return .promised
+    }
+
+    func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+        return [.customSong]
+    }
+
+    func pasteboardPropertyList(forType type: NSPasteboard.PasteboardType) -> Any? {
+        if type == .customSong {
+            return try? PropertyListEncoder().encode(self)
+        }
+        return nil
+    }
+
+    static func readableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
+        return [.customSong]
+    }
+
+    static func readingOptions(forType type: NSPasteboard.PasteboardType, pasteboard: NSPasteboard) -> NSPasteboard.ReadingOptions {
+        return .asData
+    }
+    
+    
+    // MARK: - Methods
     
     func setColors(topGradientColor:NSColor, bottomGradientColor:NSColor, fontColor:NSColor) {
         self.topGradientColor = topGradientColor
@@ -111,4 +157,8 @@ class Song : Equatable, Codable {
             }
         }
     }
+}
+
+extension NSPasteboard.PasteboardType {
+    static let customSong = NSPasteboard.PasteboardType("com.knaoinr.customSong")
 }

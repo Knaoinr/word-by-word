@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewSongWindowController: NSWindowController {
+class ViewSongWindowController: NSWindowController, NSWindowDelegate {
     
     // MARK: Objects
     
@@ -59,6 +59,14 @@ class ViewSongWindowController: NSWindowController {
         
         endLabel.stringValue = "\(Double(round(10*song.songLength)/10))"
         timeSlider.maxValue = Double(song.songLength)
+        
+        //delegate!
+        window!.delegate = self
+    }
+    
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        AppDelegate.playWindow = nil
+        return true
     }
     
     // MARK: - Action response methods

@@ -26,13 +26,17 @@ class HomeWindowController: NSWindowController {
     @IBOutlet weak var homeAddLabel: NSTextField!
     
     @IBOutlet weak var sideBarButton: NSButton!
-    let sideBarController = SideBarViewController()
+    
+    @IBOutlet weak var sideBarView: ColorView!
+    @IBOutlet weak var sideBarCollectionView: NSCollectionView!
+    let sideBarDataAndDelegate = SideBarDataAndDelegate()
     
     var searchViewController = SearchViewController(backView: nil)
     
     var addWindowArray = Array<AddWindowController>()
     
     let peach = NSColor(calibratedRed: 1, green: 0.3, blue: 0.3, alpha: 1)
+    let translucentGrey = NSColor(calibratedWhite: 0.3, alpha: 0.5)
     
     // MARK: - Protocol
 
@@ -48,7 +52,7 @@ class HomeWindowController: NSWindowController {
     // MARK: - Action response methods
     
     @IBAction func onPlayButtonPress(_ sender: NSButton) {
-        //
+        //TODO: play
     }
     
     @IBAction func onSearchButtonPress(_ sender: NSButton) {
@@ -58,7 +62,7 @@ class HomeWindowController: NSWindowController {
     }
     
     @IBAction func onBrowseButtonPress(_ sender: NSButton) {
-        //
+        //TODO: play
     }
     
     @IBAction func onAddButtonPress(_ sender: NSButton) {
@@ -69,11 +73,29 @@ class HomeWindowController: NSWindowController {
     
     @IBAction func onSideBarButtonPress(_ sender: NSButton) {
         sideBarButton.isHidden = true
-        window!.contentView!.addSubview(sideBarController.view)
+        sideBarView.isHidden = false
     }
     
     @IBAction func onHomeButtonPress(_ sender: NSButton) {
         scrollView.documentView = documentView
+    }
+    
+    // For side bar only
+    
+    @IBAction func onSideBarExitPress(_ sender: NSButton) {
+        sideBarButton.isHidden = false
+        sideBarView.isHidden = true
+    }
+    
+    @IBAction func onPlayQueue(_ sender: NSButton) {
+        //temporary
+        sideBarCollectionView.reloadData()
+    }
+    
+    @IBAction func onShuffleQueue(_ sender: NSButton) {
+    }
+    
+    @IBAction func onClearQueue(_ sender: NSButton) {
     }
     
     // MARK: - Homemade functions
@@ -123,6 +145,13 @@ class HomeWindowController: NSWindowController {
             homeBrowseLabel.backgroundColor = homeSearchLabel.backgroundColor!
             homeAddLabel.backgroundColor = homeSearchLabel.backgroundColor!
         }
+        
+        //Side bar/queue
+        sideBarView.changeGradientColor(start: translucentGrey, end: translucentGrey)
+        sideBarCollectionView.backgroundColors = [.clear]
+        sideBarCollectionView.dataSource = sideBarDataAndDelegate
+        sideBarCollectionView.delegate = sideBarDataAndDelegate
+        sideBarCollectionView.registerForDraggedTypes([.customSong])
         
         documentView.setFrameSize(NSSize(width: scrollView.contentView.bounds.width, height: max(500, scrollView.contentView.bounds.height)))
     }

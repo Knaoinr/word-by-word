@@ -36,7 +36,7 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
         super.viewDidLoad()
         // Do view setup here.
         
-        view.setFrameSize(NSSize(width: AppDelegate.mainWindow!.frame.width, height: AppDelegate.mainWindow!.frame.height - 20))
+        view.setFrameSize(NSSize(width: AppDelegate.mainWindow!.frame.width - 5, height: AppDelegate.mainWindow!.frame.height - 25))
 
         collectionView.backgroundColors = [.clear]
 
@@ -107,6 +107,11 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
         }
         
         AppDelegate.mainWindow!.makeFirstResponder(nil)
+    }
+    
+    //drag out
+    func collectionView(_ collectionView: NSCollectionView, pasteboardWriterForItemAt indexPath: IndexPath) -> NSPasteboardWriting? {
+        return dataSource.searchResults[indexPath.item]
     }
     
     

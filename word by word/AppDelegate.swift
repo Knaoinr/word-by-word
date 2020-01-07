@@ -39,8 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     func windowDidResize(_ notification: Notification) {
         mainWindowController.documentView.setFrameSize(NSSize(width: mainWindowController.scrollView.contentView.bounds.width, height: max(500, mainWindowController.scrollView.contentView.bounds.height - 20)))
-        mainWindowController.searchViewController.view.setFrameSize(AppDelegate.mainWindow!.frame.size)
-        mainWindowController.sideBarController.reposition(size: AppDelegate.mainWindow!.frame.size)
+        mainWindowController.searchViewController.view.setFrameSize(NSSize(width: AppDelegate.mainWindow!.frame.width - 5, height: AppDelegate.mainWindow!.frame.height - 25))
     }
     
     // MARK: - Data

@@ -17,6 +17,8 @@
                 <outlet property="homeSearchLabel" destination="sez-if-TMN" id="0h3-pV-ZDZ"/>
                 <outlet property="scrollView" destination="Ga3-t2-jZL" id="7cZ-we-hCs"/>
                 <outlet property="sideBarButton" destination="Ur3-KM-q02" id="Gc3-hB-ZYK"/>
+                <outlet property="sideBarCollectionView" destination="nRZ-2V-wXW" id="mhl-tj-gn8"/>
+                <outlet property="sideBarView" destination="N06-q6-jqD" id="CGS-eK-PKK"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -222,27 +224,148 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N06-q6-jqD" customClass="ColorView" customModule="word_by_word" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="600"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bgc-gE-XcR">
+                                <rect key="frame" x="38" y="576" width="50" height="19"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Queue" id="Xs0-u1-O8D">
+                                    <font key="font" metaFont="system" size="15"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6oS-eX-gWp">
+                                <rect key="frame" x="0.0" y="570" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="TlD-XB-JoB"/>
+                                    <constraint firstAttribute="width" constant="30" id="UPm-7k-psu"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSLeftFacingTriangleTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="CIF-dl-ges">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onSideBarExitPress:" target="-2" id="LJQ-mm-cOD"/>
+                                </connections>
+                            </button>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Mot-K3-9C4">
+                                <rect key="frame" x="10" y="562" width="130" height="5"/>
+                            </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fAc-6I-brW">
+                                <rect key="frame" x="25" y="533" width="20" height="22"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSTouchBarPlayTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wm2-z4-mdC">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onPlayQueue:" target="-2" id="I8G-bs-gVh"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="65i-je-1bC">
+                                <rect key="frame" x="65" y="533" width="20" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="WVc-1R-7Xt"/>
+                                    <constraint firstAttribute="height" constant="20" id="lLQ-wP-XBd"/>
+                                </constraints>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSPathTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2DG-bT-6Hb">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onShuffleQueue:" target="-2" id="Gyf-1I-X9a"/>
+                                </connections>
+                            </button>
+                            <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXN-lx-SB1">
+                                <rect key="frame" x="10" y="10" width="130" height="514"/>
+                                <clipView key="contentView" id="wZ3-TC-UKe">
+                                    <rect key="frame" x="1" y="1" width="128" height="512"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <collectionView selectable="YES" allowsMultipleSelection="YES" id="nRZ-2V-wXW">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="512"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="2" minimumLineSpacing="2" id="df3-gz-F9g">
+                                                <size key="itemSize" width="125" height="20"/>
+                                            </collectionViewFlowLayout>
+                                            <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="qL1-k2-5nV">
+                                    <rect key="frame" x="-100" y="-100" width="128" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="7Y7-Ks-9t9">
+                                    <rect key="frame" x="113" y="1" width="16" height="148"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jd6-Ms-AnM">
+                                <rect key="frame" x="105" y="533" width="20" height="22"/>
+                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressFreestandingTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="seC-oM-TJ4">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="onClearQueue:" target="-2" id="lM9-fN-eZV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="jd6-Ms-AnM" firstAttribute="leading" secondItem="65i-je-1bC" secondAttribute="trailing" constant="20" id="0yW-3b-9HH"/>
+                            <constraint firstItem="65i-je-1bC" firstAttribute="centerY" secondItem="fAc-6I-brW" secondAttribute="centerY" id="3b2-4k-Fw3"/>
+                            <constraint firstItem="jd6-Ms-AnM" firstAttribute="centerY" secondItem="fAc-6I-brW" secondAttribute="centerY" id="BpT-kf-JGW"/>
+                            <constraint firstAttribute="trailing" secondItem="Mot-K3-9C4" secondAttribute="trailing" constant="10" id="IF1-ri-hSi"/>
+                            <constraint firstItem="6oS-eX-gWp" firstAttribute="top" secondItem="N06-q6-jqD" secondAttribute="top" id="M99-u7-GrD"/>
+                            <constraint firstItem="Mot-K3-9C4" firstAttribute="top" secondItem="6oS-eX-gWp" secondAttribute="bottom" constant="5" id="U7U-9r-fzA"/>
+                            <constraint firstItem="65i-je-1bC" firstAttribute="leading" secondItem="fAc-6I-brW" secondAttribute="trailing" constant="20" id="UUD-sh-KRH"/>
+                            <constraint firstItem="jd6-Ms-AnM" firstAttribute="width" secondItem="fAc-6I-brW" secondAttribute="width" id="Wmw-sg-R4x"/>
+                            <constraint firstItem="Mot-K3-9C4" firstAttribute="leading" secondItem="N06-q6-jqD" secondAttribute="leading" constant="10" id="X1z-JV-tJo"/>
+                            <constraint firstAttribute="width" constant="150" id="asY-mY-fSf"/>
+                            <constraint firstItem="bgc-gE-XcR" firstAttribute="centerY" secondItem="6oS-eX-gWp" secondAttribute="centerY" id="eKf-gv-jON"/>
+                            <constraint firstItem="65i-je-1bC" firstAttribute="centerX" secondItem="N06-q6-jqD" secondAttribute="centerX" id="feU-K9-ho0"/>
+                            <constraint firstItem="jd6-Ms-AnM" firstAttribute="height" secondItem="fAc-6I-brW" secondAttribute="height" id="fsQ-gG-35x"/>
+                            <constraint firstItem="bgc-gE-XcR" firstAttribute="leading" secondItem="6oS-eX-gWp" secondAttribute="trailing" constant="10" id="lFB-k9-6D3"/>
+                            <constraint firstItem="65i-je-1bC" firstAttribute="height" secondItem="fAc-6I-brW" secondAttribute="height" id="qeh-wC-bpt"/>
+                            <constraint firstAttribute="trailing" secondItem="SXN-lx-SB1" secondAttribute="trailing" constant="10" id="qhA-bo-fbD"/>
+                            <constraint firstItem="65i-je-1bC" firstAttribute="width" secondItem="fAc-6I-brW" secondAttribute="width" id="rZe-hf-9qh"/>
+                            <constraint firstItem="SXN-lx-SB1" firstAttribute="top" secondItem="fAc-6I-brW" secondAttribute="bottom" constant="10" id="xQj-nd-fwY"/>
+                            <constraint firstAttribute="bottom" secondItem="SXN-lx-SB1" secondAttribute="bottom" constant="10" id="yTz-9z-X9T"/>
+                            <constraint firstItem="SXN-lx-SB1" firstAttribute="leading" secondItem="N06-q6-jqD" secondAttribute="leading" constant="10" id="yoR-Jc-CHf"/>
+                            <constraint firstItem="6oS-eX-gWp" firstAttribute="leading" secondItem="N06-q6-jqD" secondAttribute="leading" id="z3B-x4-9bJ"/>
+                            <constraint firstItem="65i-je-1bC" firstAttribute="top" secondItem="Mot-K3-9C4" secondAttribute="bottom" constant="10" id="z8S-cZ-aeL"/>
+                        </constraints>
+                    </customView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ur3-KM-q02" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="5OC-In-d0h"/>
+                    <constraint firstAttribute="bottom" secondItem="N06-q6-jqD" secondAttribute="bottom" id="81x-9L-blg"/>
                     <constraint firstAttribute="bottom" secondItem="Ga3-t2-jZL" secondAttribute="bottom" id="Hvq-mj-kQ1"/>
                     <constraint firstItem="Ur3-KM-q02" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="NeQ-Sd-I9s"/>
                     <constraint firstAttribute="trailing" secondItem="Ga3-t2-jZL" secondAttribute="trailing" id="SHn-Gv-AaH"/>
                     <constraint firstItem="Ga3-t2-jZL" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="YJr-L7-Jfu"/>
                     <constraint firstItem="FyT-ip-hIO" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="a8X-Hb-Xwg"/>
                     <constraint firstItem="Ga3-t2-jZL" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="gVk-9S-5jl"/>
+                    <constraint firstItem="N06-q6-jqD" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="hYX-2A-Iu2"/>
                     <constraint firstAttribute="trailing" secondItem="FyT-ip-hIO" secondAttribute="trailing" id="sFN-eK-Zkg"/>
+                    <constraint firstItem="N06-q6-jqD" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="z5G-Wj-Htb"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="279" y="329.5"/>
+            <point key="canvasLocation" x="279" y="329"/>
         </window>
     </objects>
     <resources>
         <image name="NSHomeTemplate" width="14" height="14"/>
+        <image name="NSLeftFacingTriangleTemplate" width="9" height="12"/>
+        <image name="NSPathTemplate" width="16" height="10"/>
         <image name="NSRightFacingTriangleTemplate" width="9" height="12"/>
+        <image name="NSStopProgressFreestandingTemplate" width="14" height="14"/>
+        <image name="NSTouchBarPlayTemplate" width="14" height="30"/>
         <image name="add_orange" width="300" height="300"/>
         <image name="browse_orange" width="300" height="300"/>
         <image name="play_orange" width="600" height="600"/>

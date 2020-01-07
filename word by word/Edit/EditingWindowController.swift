@@ -162,7 +162,20 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         //actually save
         //Save song
         var songBank = AppDelegate.songBank
-        songBank[songBank.firstIndex(of: song)!] = newSong!
+        let songIndex = songBank.firstIndex { (testSong) -> Bool in
+            if testSong.title == song.title && testSong.artists.count == song.artists.count {
+                var matching = true
+                for index in 0...testSong.artists.count-1 {
+                    if testSong.artists[index] != song.artists[index] {
+                        matching = false
+                    }
+                }
+                return matching
+            } else {
+                return false
+            }
+        }
+        songBank[songIndex!] = newSong!
         AppDelegate.songBank = songBank
         
         //replace in collections
