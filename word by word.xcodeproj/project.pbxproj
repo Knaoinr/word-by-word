@@ -28,6 +28,8 @@
 		8258306023C2625100D2186B /* SideBarCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8258305E23C2625100D2186B /* SideBarCollectionViewItem.xib */; };
 		829C2F5223B6E6FF000CE4F0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829C2F5023B6E6FF000CE4F0 /* SearchViewController.swift */; };
 		829C2F5323B6E6FF000CE4F0 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 829C2F5123B6E6FF000CE4F0 /* SearchViewController.xib */; };
+		829D46EF23C6232300F84C9C /* SearchySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D46EE23C6232300F84C9C /* SearchySearchCell.swift */; };
+		829D46F123C66D1000F84C9C /* SearchySearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829D46F023C66D0F00F84C9C /* SearchySearchField.swift */; };
 		82A261F723BE9D030050ADEC /* SideBarDataAndDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A261F623BE9D030050ADEC /* SideBarDataAndDelegate.swift */; };
 		82DEB47423B6F21B0068CA11 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */; };
 		82DEB47723B7B2930068CA11 /* SearchCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */; };
@@ -61,6 +63,8 @@
 		8258305E23C2625100D2186B /* SideBarCollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideBarCollectionViewItem.xib; sourceTree = "<group>"; };
 		829C2F5023B6E6FF000CE4F0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		829C2F5123B6E6FF000CE4F0 /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
+		829D46EE23C6232300F84C9C /* SearchySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchySearchCell.swift; sourceTree = "<group>"; };
+		829D46F023C66D0F00F84C9C /* SearchySearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchySearchField.swift; sourceTree = "<group>"; };
 		82A261F623BE9D030050ADEC /* SideBarDataAndDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarDataAndDelegate.swift; sourceTree = "<group>"; };
 		82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewItem.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				829C2F5023B6E6FF000CE4F0 /* SearchViewController.swift */,
+				829D46F023C66D0F00F84C9C /* SearchySearchField.swift */,
+				829D46EE23C6232300F84C9C /* SearchySearchCell.swift */,
 				829C2F5123B6E6FF000CE4F0 /* SearchViewController.xib */,
 				82DEB47323B6F21B0068CA11 /* SearchDataSource.swift */,
 				82DEB47523B7B2930068CA11 /* SearchCollectionViewItem.swift */,
@@ -251,7 +257,9 @@
 				8201508323B54C3D00E9FCD2 /* SongCollection.swift in Sources */,
 				8201507923B2D4AE00E9FCD2 /* HomeWindowController.swift in Sources */,
 				8215F8EF23B988DC00088F23 /* EditingWindowController.swift in Sources */,
+				829D46F123C66D1000F84C9C /* SearchySearchField.swift in Sources */,
 				8201507523B2D21D00E9FCD2 /* AddWindowController.swift in Sources */,
+				829D46EF23C6232300F84C9C /* SearchySearchCell.swift in Sources */,
 				8201506223B2D07D00E9FCD2 /* AppDelegate.swift in Sources */,
 				8258305F23C2625100D2186B /* SideBarCollectionViewItem.swift in Sources */,
 				8201508623B5AB1700E9FCD2 /* TimingViewController.swift in Sources */,
