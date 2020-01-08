@@ -33,6 +33,8 @@ class HomeWindowController: NSWindowController {
     
     var searchViewController = SearchViewController(backView: nil)
     
+    var viewSongWindowController:ViewSongWindowController?
+    
     var addWindowArray = Array<AddWindowController>()
     
     let peach = NSColor(calibratedRed: 1, green: 0.3, blue: 0.3, alpha: 1)
@@ -52,7 +54,8 @@ class HomeWindowController: NSWindowController {
     // MARK: - Action response methods
     
     @IBAction func onPlayButtonPress(_ sender: NSButton) {
-        //TODO: play
+        //play queue
+        onPlayQueue(sender)
     }
     
     @IBAction func onSearchButtonPress(_ sender: NSButton) {
@@ -62,7 +65,7 @@ class HomeWindowController: NSWindowController {
     }
     
     @IBAction func onBrowseButtonPress(_ sender: NSButton) {
-        //TODO: play
+        //TODO: browse
     }
     
     @IBAction func onAddButtonPress(_ sender: NSButton) {
@@ -88,14 +91,50 @@ class HomeWindowController: NSWindowController {
     }
     
     @IBAction func onPlayQueue(_ sender: NSButton) {
-        //temporary
+        //if no songs in queue
+        if sideBarDataAndDelegate.queue.isEmpty {
+            //add random song
+            if let randomSong = AppDelegate.songBank.randomElement() {
+                sideBarDataAndDelegate.queue.append(randomSong)
+            } else {
+                //no songs to play
+                return
+            }
+        }
+        
+        //play queue!
+        AppDelegate.isPlayingQueue = true
+        //open view song window
+        viewSongWindowController = ViewSongWindowController(sideBarDataAndDelegate.queue[0])
+        sideBarDataAndDelegate.queue.remove(at: 0)
         sideBarCollectionView.reloadData()
+        if AppDelegate.playWindow == nil {
+            AppDelegate.playWindow = viewSongWindowController!.window
+        } else {
+            let frame = AppDelegate.playWindow!.frame
+            AppDelegate.playWindow!.close()
+            AppDelegate.playWindow = viewSongWindowController!.window
+            AppDelegate.playWindow!.setFrame(frame, display: true)
+        }
+        AppDelegate.playWindow!.makeKeyAndOrderFront(self)
     }
     
     @IBAction func onShuffleQueue(_ sender: NSButton) {
+        sideBarDataAndDelegate.queue.shuffle()
+        sideBarCollectionView.reloadData()
     }
     
     @IBAction func onClearQueue(_ sender: NSButton) {
+        sideBarDataAndDelegate.queue = []
+        sideBarCollectionView.reloadData()
+    }
+    
+    //selecting outside CV deselects
+    override func mouseDown(with event: NSEvent) {
+        //do normal stuff
+        super.mouseDown(with: event)
+        
+        sideBarCollectionView.deselectAll(nil)
     }
     
     // MARK: - Homemade functions

@@ -39,6 +39,8 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     
     @IBOutlet weak var saveAndQuitButton: NSButton!
     
+    var didChange = false
+    
     
     // MARK: - Protocol
     
@@ -125,30 +127,32 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         newSong!.timing = song.timing
         
         //erase timing & save dangerous values if different (no allowance >:()
-        if lyricsTextView.string != convertToOneBigString(song.lyrics) || songMinute.stringValue != "\(floor(song.songLength/60))" || songSecond.stringValue != "\(song.songLength.truncatingRemainder(dividingBy: 60))" || firstMinute.stringValue != "\(floor(song.firstLyric/60))" || firstSecond.stringValue != "\(song.firstLyric.truncatingRemainder(dividingBy: 60))" {
-            //set values
-            //1. lyrics
-            let everyLineBreakIsN = lyricsTextView.string.replacingOccurrences(of: "\r", with: "\n")
-            let lineArray = everyLineBreakIsN.split(separator: "\n")
-            var lyricArray:[Array<String>] = []
-            var z = 0
-            for x in 0...lineArray.count-1 {
-                if lineArray[x].split(separator: " ").count > 0 {
-                    lyricArray.append([])
-                    for y in 0...lineArray[x].split(separator: " ").count - 1 {
-                        lyricArray[z].append(String(lineArray[x].split(separator: " ")[y]))
+        if didChange {
+            if lyricsTextView.string != convertToOneBigString(song.lyrics) || songMinute.stringValue != "\(floor(song.songLength/60))" || songSecond.stringValue != "\(song.songLength.truncatingRemainder(dividingBy: 60))" || firstMinute.stringValue != "\(floor(song.firstLyric/60))" || firstSecond.stringValue != "\(song.firstLyric.truncatingRemainder(dividingBy: 60))" {
+                //set values
+                //1. lyrics
+                let everyLineBreakIsN = lyricsTextView.string.replacingOccurrences(of: "\r", with: "\n")
+                let lineArray = everyLineBreakIsN.split(separator: "\n")
+                var lyricArray:[Array<String>] = []
+                var z = 0
+                for x in 0...lineArray.count-1 {
+                    if lineArray[x].split(separator: " ").count > 0 {
+                        lyricArray.append([])
+                        for y in 0...lineArray[x].split(separator: " ").count - 1 {
+                            lyricArray[z].append(String(lineArray[x].split(separator: " ")[y]))
+                        }
+                        z += 1
                     }
-                    z += 1
                 }
+                newSong!.lyrics = lyricArray
+                
+                //2. timing
+                newSong!.songLength = CGFloat(60*songMinute.floatValue + songSecond.floatValue)
+                newSong!.firstLyric = CGFloat(60*firstMinute.floatValue + firstSecond.floatValue)
+                
+                //erase timing
+                newSong!.resetTimingSize()
             }
-            newSong!.lyrics = lyricArray
-            
-            //2. timing
-            newSong!.songLength = CGFloat(60*songMinute.floatValue + songSecond.floatValue)
-            newSong!.firstLyric = CGFloat(60*firstMinute.floatValue + firstSecond.floatValue)
-            
-            //erase timing
-            newSong!.resetTimingSize()
         }
         
         //save safe values!
@@ -199,7 +203,17 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         //delete song from song bank
         var songBank = AppDelegate.songBank
         songBank.removeAll { (testSong) -> Bool in
-            return song == testSong
+            if testSong.title == song.title && testSong.artists.count == song.artists.count {
+                var matching = true
+                for index in 0...testSong.artists.count-1 {
+                    if testSong.artists[index] != song.artists[index] {
+                        matching = false
+                    }
+                }
+                return matching
+            } else {
+                return false
+            }
         }
         AppDelegate.songBank = songBank
         
@@ -209,7 +223,17 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
             //if contained in collection, replace
             if collection.songs.contains(song) {
                 collection.songs.removeAll { (testSong) -> Bool in
-                    return song == testSong
+                    if testSong.title == song.title && testSong.artists.count == song.artists.count {
+                        var matching = true
+                        for index in 0...testSong.artists.count-1 {
+                            if testSong.artists[index] != song.artists[index] {
+                                matching = false
+                            }
+                        }
+                        return matching
+                    } else {
+                        return false
+                    }
                 }
             }
         }
@@ -244,6 +268,7 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     }
     
     @IBAction func onDangerousLockChange(_ sender: NSButton) {
+        didChange = true
         //make light if on, dark if off
         if sender.state == .on {
             //enable

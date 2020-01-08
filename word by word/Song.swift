@@ -40,6 +40,7 @@ class Song : NSObject, Codable, NSPasteboardWriting, NSPasteboardReading {
         resetTimingSize()
     }
     
+    //doesn't work lol
     static func == (lhs: Song, rhs: Song) -> Bool {
         if lhs.title == rhs.title && lhs.artists.count == rhs.artists.count {
             var matching = true

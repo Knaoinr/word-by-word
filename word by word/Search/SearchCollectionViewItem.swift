@@ -74,6 +74,8 @@ class SearchCollectionViewItem: NSCollectionViewItem {
     }
     
     @objc func onDoubleClick() {
+        //mark as playing by selection
+        AppDelegate.isPlayingQueue = false
         //open view song window
         viewSongWindowController = ViewSongWindowController(song)
         if AppDelegate.playWindow == nil {

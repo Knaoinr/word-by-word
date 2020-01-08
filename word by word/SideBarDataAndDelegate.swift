@@ -26,11 +26,55 @@ class SideBarDataAndDelegate: NSObject, NSCollectionViewDataSource, NSCollection
         return item
     }
     
+    //MARK: - selection
+    
+    func collectionView(_ collectionView: NSCollectionView, didChangeItemsAt indexPaths: Set<IndexPath>, to highlightState: NSCollectionViewItem.HighlightState) {
+        if highlightState == .forSelection {
+            //highlight
+            for path in indexPaths {
+                //set cell to highlighted
+                ((collectionView.item(at: path) as! SideBarCollectionViewItem).view as! ColorView).changeGradientColor(start: .gray, end: .gray)
+            }
+        } else if highlightState == .none || highlightState == .forDeselection {
+            //unhighlight
+            for path in indexPaths {
+                //set cell to regular
+                if !collectionView.item(at: path)!.isSelected {
+                    ((collectionView.item(at: path) as! SideBarCollectionViewItem).view as! ColorView).changeGradientColor(start: .clear, end: .clear)
+                }
+            }
+        }
+    }
+    
+    //change highlight state on programmatic de/selection as well as regular
+    func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        collectionView.delegate!.collectionView?(collectionView, didChangeItemsAt: indexPaths, to: .forDeselection)
+    }
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        collectionView.delegate!.collectionView?(collectionView, didChangeItemsAt: indexPaths, to: .forSelection)
+    }
+    
+    //MARK: - drag
+    
     //drag out
     func collectionView(_ collectionView: NSCollectionView, pasteboardWriterForItemAt indexPath: IndexPath) -> NSPasteboardWriting? {
         let songToMove = queue[indexPath.item]
         indexToDelete = indexPath.item
         return songToMove
+    }
+    
+    //delete by drag outside side bar
+    func collectionView(_ collectionView: NSCollectionView, draggingSession session: NSDraggingSession, endedAt screenPoint: NSPoint, dragOperation operation: NSDragOperation) {
+        //put side bar in screen coords
+        let sideBarRect = AppDelegate.mainWindow!.convertToScreen((AppDelegate.mainWindow!.windowController as! HomeWindowController).sideBarView.frame)
+        //if outside CV
+        if (!sideBarRect.contains(screenPoint)) {
+            if (indexToDelete != nil) {
+                queue.remove(at: indexToDelete!)
+                indexToDelete = nil
+            }
+            collectionView.reloadData()
+        }
     }
     
     //drag in

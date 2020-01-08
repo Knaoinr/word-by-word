@@ -90,9 +90,26 @@ class ViewSongWindowController: NSWindowController, NSWindowDelegate {
         
         //if end
         if timeSlider.doubleValue >= Double(song!.songLength) {
-            onPausePlay(playPauseButton)
-            timeSlider.doubleValue = timeSlider.maxValue
-            startLabel.stringValue = "\(Double(round(10*song.songLength)/10))"
+            //if in queue
+            if AppDelegate.isPlayingQueue {
+                //if has remaining songs
+                if !(AppDelegate.mainWindow!.windowController as! HomeWindowController).sideBarDataAndDelegate.queue.isEmpty {
+                    //open view song window
+                    AppDelegate.playWindowController = ViewSongWindowController((AppDelegate.mainWindow!.windowController as! HomeWindowController).sideBarDataAndDelegate.queue[0])
+                    (AppDelegate.mainWindow!.windowController as! HomeWindowController).sideBarDataAndDelegate.queue.remove(at: 0)
+                    let frame = AppDelegate.playWindow!.frame
+                    timer.invalidate()
+                    AppDelegate.playWindow!.close()
+                    AppDelegate.playWindow = AppDelegate.playWindowController!.window
+                    AppDelegate.playWindow!.setFrame(frame, display: true)
+                    AppDelegate.playWindow!.makeKeyAndOrderFront(self)
+                    return
+                }
+            } else { //playing by hand -> go back to start
+                onPausePlay(playPauseButton)
+                timeSlider.doubleValue = timeSlider.maxValue
+                startLabel.stringValue = "\(Double(round(10*song.songLength)/10))"
+            }
         }
         
         //automatically go down at the time

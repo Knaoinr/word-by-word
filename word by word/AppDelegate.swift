@@ -17,6 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     
     static var mainWindow: NSWindow?
     static var playWindow: NSWindow?
+    static var playWindowController: ViewSongWindowController? //for queue
+    static var isPlayingQueue = false
     let mainWindowController = HomeWindowController(windowNibName: "HomeWindowController")
 
 
