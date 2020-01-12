@@ -183,6 +183,10 @@ class TimingViewController: NSViewController {
     }
     
     @IBAction func onDiscardChanges(_ sender: NSButton) {
+        //stop timer
+        playPauseButton.image = NSImage(named: NSImage.touchBarPlayTemplateName)
+        timer.invalidate()
+        
         //set to previous version
         justEditedTiming = newTiming
         //go to first lyric again
@@ -213,6 +217,10 @@ class TimingViewController: NSViewController {
     }
     
     @IBAction func onSaveChanges(_ sender: NSButton) {
+        //stop timer
+        playPauseButton.image = NSImage(named: NSImage.touchBarPlayTemplateName)
+        timer.invalidate()
+        
         //set to overwritten or averaged changes
         newTiming = combineTimingChanges()
         justEditedTiming = newTiming
