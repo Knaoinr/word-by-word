@@ -114,7 +114,7 @@ class ViewSongWindowController: NSWindowController, NSWindowDelegate {
         
         //automatically go down at the time
         if oneBelowIndex != nil {
-            if abs(CGFloat(timeSlider.doubleValue) - song.timing[oneBelowIndex![0]][oneBelowIndex![1]]) < 0.025 {
+            if song.timing[oneBelowIndex![0]][oneBelowIndex![1]] - CGFloat(timeSlider.doubleValue) < 0.025 {
                 //set right color
                 if word.stringValue == song.lyrics[oneBelowIndex![0]][oneBelowIndex![1]] && word.textColor == song.fontColor {
                     word.textColor = song.alternateFontColor
@@ -141,9 +141,7 @@ class ViewSongWindowController: NSWindowController, NSWindowDelegate {
     }
     
     @IBAction func onSlide(_ sender: NSSlider) {
-        //stop timer
-        playPauseButton.image = NSImage(named: NSImage.touchBarPlayTemplateName)
-        timer.invalidate()
+        //don't stop timer
         
         startLabel.stringValue = "\(Double(round(10*sender.doubleValue)/10))"
         

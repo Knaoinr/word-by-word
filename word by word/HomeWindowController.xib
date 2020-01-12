@@ -67,12 +67,13 @@
                             <rect key="frame" x="1" y="1" width="798" height="598"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view id="k2W-Rw-9WY">
+                                <view ambiguous="YES" id="k2W-Rw-9WY">
                                     <rect key="frame" x="0.0" y="0.0" width="783" height="583"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="UZA-r4-ujr">
+                                        <button id="UZA-r4-ujr">
                                             <rect key="frame" x="292" y="283" width="200" height="200"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="200" id="4nL-bl-lbw"/>
                                                 <constraint firstAttribute="height" constant="200" id="I1c-LY-BfD"/>
@@ -85,7 +86,7 @@
                                                 <action selector="onPlayButtonPress:" target="-2" id="UIZ-Kh-y8f"/>
                                             </connections>
                                         </button>
-                                        <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="80" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bzr-Qn-3jl">
+                                        <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="80" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bzr-Qn-3jl">
                                             <rect key="frame" x="162" y="115" width="460" height="138"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GYM-aw-Wdq">
@@ -106,7 +107,7 @@
                                                             </connections>
                                                         </button>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sez-if-TMN">
-                                                            <rect key="frame" x="17" y="0.0" width="65" height="23"/>
+                                                            <rect key="frame" x="18" y="0.0" width="65" height="23"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Search" id="eTz-bv-iqG">
                                                                 <font key="font" metaFont="system" size="20"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -141,7 +142,7 @@
                                                             </connections>
                                                         </button>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Q5-HP-Jqj">
-                                                            <rect key="frame" x="15" y="0.0" width="69" height="23"/>
+                                                            <rect key="frame" x="16" y="0.0" width="69" height="23"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Browse" id="qjc-86-AC3">
                                                                 <font key="font" metaFont="system" size="20"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
