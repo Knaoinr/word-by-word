@@ -11,7 +11,11 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="word_by_word" customModuleProvider="target"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="word_by_word" customModuleProvider="target">
+            <connections>
+                <outlet property="exportMenuItem" destination="nW7-Ax-tKV" id="ppP-u9-AXk"/>
+            </connections>
+        </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -68,12 +72,12 @@
                                     <action selector="newSong:" target="Voe-Tx-rLC" id="ELu-MR-wQJ"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open…" keyEquivalent="o" id="ne1-rb-LJ4">
+                            <menuItem title="Import…" keyEquivalent="o" id="ne1-rb-LJ4">
                                 <connections>
                                     <action selector="openFile:" target="Voe-Tx-rLC" id="AHx-ru-Jgd"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Export..." id="nW7-Ax-tKV" customClass="ConditionalMenuItem" customModule="word_by_word" customModuleProvider="target">
+                            <menuItem title="Export…" id="nW7-Ax-tKV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="exportAs:" target="Voe-Tx-rLC" id="8mJ-3A-YcV"/>
@@ -113,9 +117,11 @@
                                 </connections>
                             </menuItem>
                             <menuItem title="Delete" id="pa3-QI-u2k">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                 <connections>
-                                    <action selector="delete:" target="-1" id="0Mk-Ml-PaM"/>
+                                    <action selector="deleteCells:" target="-1" id="MoA-rK-qAp"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Select All" keyEquivalent="a" id="Ruw-6m-B2m">

@@ -21,7 +21,8 @@ class ViewSongWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var endLabel: NSTextField!
     @IBOutlet weak var playPauseButton: NSButton!
     @IBOutlet weak var word: NSTextField!
-    
+    @IBOutlet weak var lyrics: NSTextField!
+
     var timer = Timer()
     
     // MARK: - Protocol
@@ -59,6 +60,11 @@ class ViewSongWindowController: NSWindowController, NSWindowDelegate {
         
         endLabel.stringValue = "\(Double(round(10*song.songLength)/10))"
         timeSlider.maxValue = Double(song.songLength)
+        
+        if song.translatedLyrics.count > 0 {
+            lyrics.stringValue = song.translatedLyrics[0]
+        }
+        lyrics.textColor = song.fontColor
         
         //delegate!
         window!.delegate = self
@@ -123,6 +129,9 @@ class ViewSongWindowController: NSWindowController, NSWindowDelegate {
                 }
                 //move up
                 word.stringValue = song.lyrics[oneBelowIndex![0]][oneBelowIndex![1]]
+                if song.translatedLyrics.count > oneBelowIndex![0] {
+                    lyrics.stringValue = song.translatedLyrics[oneBelowIndex![0]]
+                }
                 oneBelowIndex = getNextWordIndex(oneBelowIndex![0], oneBelowIndex![1])
             }
         }
@@ -150,6 +159,18 @@ class ViewSongWindowController: NSWindowController, NSWindowDelegate {
         word.stringValue = song.lyrics[rightIndex[0]][rightIndex[1]]
         oneBelowIndex = getNextWordIndex(rightIndex[0], rightIndex[1])
         word.textColor = song.fontColor
+        if song.translatedLyrics.count > rightIndex[0] {
+            lyrics.stringValue = song.translatedLyrics[rightIndex[0]]
+        }
+    }
+    
+    @IBAction func onCC(_ sender: NSButton) {
+        //lyrics on/off
+        if sender.state == .on {
+            lyrics.isHidden = false
+        } else {
+            lyrics.isHidden = true
+        }
     }
     
     // MARK: - Homemade methods

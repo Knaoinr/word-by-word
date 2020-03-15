@@ -114,6 +114,31 @@ class SearchViewController: NSViewController, NSCollectionViewDelegate {
         return dataSource.searchResults[indexPath.item]
     }
     
+    //delete
+    @IBAction func deleteCells(_ sender: Any) {
+        var songBank = AppDelegate.songBank
+        for path in collectionView.selectionIndexPaths {
+            let song = (collectionView.item(at: path) as! SearchCollectionViewItem).song!
+            let songIndex = songBank.firstIndex { (testSong) -> Bool in
+                if testSong.title == song.title && testSong.artists.count == song.artists.count {
+                    var matching = true
+                    for index in 0...testSong.artists.count-1 {
+                        if testSong.artists[index] != song.artists[index] {
+                            matching = false
+                        }
+                    }
+                    return matching
+                } else {
+                    return false
+                }
+            }
+            songBank.remove(at: songIndex!)
+        }
+        AppDelegate.songBank = songBank
+        
+        //reload search
+        onSearch(searchField)
+    }
     
     // MARK: - Methods
     

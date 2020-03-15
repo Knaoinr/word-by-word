@@ -9,9 +9,9 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, NSMenuItemValidation {
     
-    //TODO: shortcuts & tool tips...
+    //TODO: lyrics, collections...
 
     // MARK: - Objects
     
@@ -20,7 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     static var playWindowController: ViewSongWindowController? //for queue
     static var isPlayingQueue = false
     let mainWindowController = HomeWindowController(windowNibName: "HomeWindowController")
-
+    
+    @IBOutlet weak var exportMenuItem: NSMenuItem!
+    
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -30,6 +32,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         AppDelegate.mainWindow!.delegate = self
         AppDelegate.mainWindow!.isOpaque = false
         AppDelegate.mainWindow!.orderFrontRegardless()
+        
+        //menu things
+        exportMenuItem.target = self
         
         //Reload from memory
         reloadSavedData()
@@ -51,7 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         mainWindowController.onAddButtonPress(sender)
     }
     
-    //File>Open...
+    //File>Import...
     @IBAction func openFile(_ sender: NSMenuItem) {
         let dialog = NSOpenPanel()
         
@@ -78,13 +83,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             // User clicked on "Cancel"
             return
         }
+        
+       //reload data
+        mainWindowController.searchViewController.onSearch(mainWindowController.searchViewController.searchField)
     }
     
     //File>Export...
     @IBAction func exportAs(_ sender: NSMenuItem) {
         let dialog = NSSavePanel()
         
-        dialog.message = "Choose where to place your file containing all songs selected..."
+        dialog.message = "This file will contain all selected songs as an array."
         dialog.allowedFileTypes = ["txt"]
         dialog.allowsOtherFileTypes = false
 
@@ -107,6 +115,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
             // User clicked on "Cancel"
             return
         }
+    }
+    
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+
+        if menuItem.title == "Export…" {
+            return (AppDelegate.mainWindow?.windowController as! HomeWindowController).searchViewController.collectionView.selectionIndexPaths.count > 0
+        }
+        
+        return true
     }
     
     // MARK: - Data
@@ -147,7 +164,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 let jsonData = jsonString.data(using: .utf8)!
                 songBank = try JSONDecoder().decode([Song].self, from: jsonData)
             } catch {
-                print("AppDelegate.songBank: Could not convert to Song")
+                print("AppDelegate.songBank: Could not convert to [Song]")
             }
             return songBank
         }
@@ -170,7 +187,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
                 let jsonData = jsonString.data(using: .utf8)!
                 collectionBank = try JSONDecoder().decode([SongCollection].self, from: jsonData)
             } catch {
-                print("AppDelegate.collectionBank: Could not convert to SongCollection")
+                print("AppDelegate.collectionBank: Could not convert to [SongCollection]")
             }
             return collectionBank
         }

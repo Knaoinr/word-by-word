@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,7 +29,7 @@
             <rect key="frame" x="0.0" y="0.0" width="489" height="341"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uFJ-mm-Vs9">
+                <comboBox toolTip="A new or existing album, playlist, or collection this song belongs to." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="uFJ-mm-Vs9">
                     <rect key="frame" x="20" y="282" width="288" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="285" id="EeE-gX-LLI"/>
@@ -43,7 +43,7 @@
                         <action selector="onFirstComboChoice:" target="-2" id="dpu-WP-O6N"/>
                     </connections>
                 </comboBox>
-                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K9D-r6-zrj">
+                <comboBox toolTip="A new or existing album, playlist, or collection this song belongs to." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K9D-r6-zrj">
                     <rect key="frame" x="20" y="253" width="288" height="25"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="DeX-pd-nJ9">
                         <font key="font" metaFont="system"/>
@@ -54,7 +54,7 @@
                         <action selector="onSecondComboChoice:" target="-2" id="mb7-vr-mkz"/>
                     </connections>
                 </comboBox>
-                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hqy-bD-7K1">
+                <comboBox toolTip="A new or existing album, playlist, or collection this song belongs to." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hqy-bD-7K1">
                     <rect key="frame" x="20" y="224" width="288" height="25"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="fA6-0z-AN1">
                         <font key="font" metaFont="system"/>
@@ -73,7 +73,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Jne-uo-3Av">
+                <colorWell toolTip="The top gradient color." translatesAutoresizingMaskIntoConstraints="NO" id="Jne-uo-3Av">
                     <rect key="frame" x="20" y="137" width="128" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="128" id="VTL-td-xUC"/>
@@ -84,14 +84,14 @@
                         <action selector="onTopGradientWell:" target="-2" id="pcK-bX-xca"/>
                     </connections>
                 </colorWell>
-                <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="VMt-Tq-gfF">
+                <colorWell toolTip="The bottom gradient color." translatesAutoresizingMaskIntoConstraints="NO" id="VMt-Tq-gfF">
                     <rect key="frame" x="20" y="79" width="128" height="50"/>
                     <color key="color" red="0.75434027197588494" green="0.56907611012298043" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <action selector="onBottomGradientWell:" target="-2" id="IlO-Uc-7DQ"/>
                     </connections>
                 </colorWell>
-                <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="Vrl-IC-yxQ">
+                <colorWell toolTip="The font color." translatesAutoresizingMaskIntoConstraints="NO" id="Vrl-IC-yxQ">
                     <rect key="frame" x="54" y="89" width="60" height="90"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="90" id="agn-OX-aZs"/>
@@ -261,6 +261,7 @@ Gw
                 </button>
                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jDY-El-Mm6">
                     <rect key="frame" x="311" y="287" width="72" height="18"/>
+                    <string key="toolTip">Whether the order matters in this collection. If so, it will be placed at the end; you can change the order later. If not, it will be shuffled in, and the collection will shuffle automatically each time you look at it.</string>
                     <buttonCell key="cell" type="check" title="Ordered" bezelStyle="regularSquare" imagePosition="left" inset="2" id="OdC-zY-lzA">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -268,6 +269,7 @@ Gw
                 </button>
                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9Vt-vY-qaL">
                     <rect key="frame" x="311" y="229" width="72" height="18"/>
+                    <string key="toolTip">Whether the order matters in this collection. If so, it will be placed at the end; you can change the order later. If not, it will be shuffled in, and the collection will shuffle automatically each time you look at it.</string>
                     <buttonCell key="cell" type="check" title="Ordered" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1i3-vo-rGt">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>
@@ -275,6 +277,7 @@ Gw
                 </button>
                 <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sia-oC-X8o">
                     <rect key="frame" x="311" y="258" width="72" height="18"/>
+                    <string key="toolTip">Whether the order matters in this collection. If so, it will be placed at the end; you can change the order later. If not, it will be shuffled in, and the collection will shuffle automatically each time you look at it.</string>
                     <buttonCell key="cell" type="check" title="Ordered" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ZCa-h0-nU9">
                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                         <font key="font" metaFont="system"/>

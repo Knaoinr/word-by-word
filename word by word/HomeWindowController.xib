@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,7 +33,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ur3-KM-q02">
+                    <button toolTip="Show the queue." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ur3-KM-q02">
                         <rect key="frame" x="0.0" y="570" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="9Eb-BB-eJt"/>
@@ -47,7 +47,7 @@
                             <action selector="onSideBarButtonPress:" target="-2" id="0rc-gs-ESW"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FyT-ip-hIO">
+                    <button toolTip="Return to the home menu." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FyT-ip-hIO">
                         <rect key="frame" x="770" y="570" width="30" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="8hY-Qm-1GR"/>
@@ -67,32 +67,17 @@
                             <rect key="frame" x="1" y="1" width="798" height="598"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <view ambiguous="YES" id="k2W-Rw-9WY">
+                                <view id="k2W-Rw-9WY">
                                     <rect key="frame" x="0.0" y="0.0" width="783" height="583"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <button id="UZA-r4-ujr">
-                                            <rect key="frame" x="292" y="283" width="200" height="200"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="4nL-bl-lbw"/>
-                                                <constraint firstAttribute="height" constant="200" id="I1c-LY-BfD"/>
-                                            </constraints>
-                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_orange" imagePosition="only" alignment="center" imageScaling="axesIndependently" inset="2" id="4WU-Qo-fnb">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="onPlayButtonPress:" target="-2" id="UIZ-Kh-y8f"/>
-                                            </connections>
-                                        </button>
-                                        <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="80" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" ambiguous="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bzr-Qn-3jl">
+                                        <stackView distribution="fillEqually" orientation="horizontal" alignment="centerY" spacing="80" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bzr-Qn-3jl">
                                             <rect key="frame" x="162" y="115" width="460" height="138"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GYM-aw-Wdq">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="138"/>
                                                     <subviews>
-                                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="l7O-U6-rL2">
+                                                        <button toolTip="Search through all your songs." translatesAutoresizingMaskIntoConstraints="NO" id="l7O-U6-rL2">
                                                             <rect key="frame" x="0.0" y="38" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="100" id="58j-t1-I2m"/>
@@ -107,7 +92,7 @@
                                                             </connections>
                                                         </button>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sez-if-TMN">
-                                                            <rect key="frame" x="18" y="0.0" width="65" height="23"/>
+                                                            <rect key="frame" x="17" y="0.0" width="65" height="23"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Search" id="eTz-bv-iqG">
                                                                 <font key="font" metaFont="system" size="20"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -127,7 +112,7 @@
                                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bqd-h9-JfI">
                                                     <rect key="frame" x="180" y="0.0" width="100" height="138"/>
                                                     <subviews>
-                                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="5yc-RA-VaW">
+                                                        <button toolTip="Browse songs by collection." translatesAutoresizingMaskIntoConstraints="NO" id="5yc-RA-VaW">
                                                             <rect key="frame" x="0.0" y="38" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="100" id="eGY-jD-Uax"/>
@@ -142,7 +127,7 @@
                                                             </connections>
                                                         </button>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Q5-HP-Jqj">
-                                                            <rect key="frame" x="16" y="0.0" width="69" height="23"/>
+                                                            <rect key="frame" x="15" y="0.0" width="69" height="23"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Browse" id="qjc-86-AC3">
                                                                 <font key="font" metaFont="system" size="20"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -162,7 +147,7 @@
                                                 <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JPX-aK-tIL">
                                                     <rect key="frame" x="360" y="0.0" width="100" height="138"/>
                                                     <subviews>
-                                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="E8L-78-2ta">
+                                                        <button toolTip="Create a new song." translatesAutoresizingMaskIntoConstraints="NO" id="E8L-78-2ta">
                                                             <rect key="frame" x="0.0" y="38" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="100" id="VeB-1Y-ARI"/>
@@ -206,12 +191,26 @@
                                                 <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
                                         </stackView>
+                                        <button toolTip="Play a random song." translatesAutoresizingMaskIntoConstraints="NO" id="UZA-r4-ujr">
+                                            <rect key="frame" x="292" y="283" width="200" height="200"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="QEe-bT-Edc"/>
+                                                <constraint firstAttribute="width" constant="200" id="rge-2O-W0h"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play_orange" imagePosition="only" alignment="center" imageScaling="axesIndependently" inset="2" id="4WU-Qo-fnb">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="onPlayButtonPress:" target="-2" id="UIZ-Kh-y8f"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="UZA-r4-ujr" firstAttribute="centerX" secondItem="k2W-Rw-9WY" secondAttribute="centerX" id="cWY-DG-KS3"/>
-                                        <constraint firstItem="UZA-r4-ujr" firstAttribute="top" secondItem="k2W-Rw-9WY" secondAttribute="top" constant="100" id="caK-bD-WIi"/>
-                                        <constraint firstItem="Bzr-Qn-3jl" firstAttribute="centerX" secondItem="k2W-Rw-9WY" secondAttribute="centerX" id="srI-Rg-3Ed"/>
-                                        <constraint firstItem="Bzr-Qn-3jl" firstAttribute="top" secondItem="UZA-r4-ujr" secondAttribute="bottom" constant="30" id="tzd-vl-7bq"/>
+                                        <constraint firstItem="UZA-r4-ujr" firstAttribute="top" secondItem="k2W-Rw-9WY" secondAttribute="top" constant="100" id="2xR-RM-Peu"/>
+                                        <constraint firstItem="Bzr-Qn-3jl" firstAttribute="top" secondItem="UZA-r4-ujr" secondAttribute="bottom" constant="30" id="A7d-JI-wiO"/>
+                                        <constraint firstItem="UZA-r4-ujr" firstAttribute="centerX" secondItem="k2W-Rw-9WY" secondAttribute="centerX" id="Ojh-3I-Orq"/>
+                                        <constraint firstItem="Bzr-Qn-3jl" firstAttribute="centerX" secondItem="k2W-Rw-9WY" secondAttribute="centerX" id="ffc-3c-rIe"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -236,7 +235,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6oS-eX-gWp">
+                            <button toolTip="Hide the queue." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6oS-eX-gWp">
                                 <rect key="frame" x="0.0" y="570" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="TlD-XB-JoB"/>
@@ -253,7 +252,7 @@
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Mot-K3-9C4">
                                 <rect key="frame" x="10" y="562" width="130" height="5"/>
                             </box>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fAc-6I-brW">
+                            <button toolTip="Play queue." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fAc-6I-brW">
                                 <rect key="frame" x="25" y="533" width="20" height="22"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSTouchBarPlayTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wm2-z4-mdC">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -263,7 +262,7 @@
                                     <action selector="onPlayQueue:" target="-2" id="I8G-bs-gVh"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="65i-je-1bC">
+                            <button toolTip="Shuffle queue." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="65i-je-1bC">
                                 <rect key="frame" x="65" y="533" width="20" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="WVc-1R-7Xt"/>
@@ -299,11 +298,11 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="7Y7-Ks-9t9">
-                                    <rect key="frame" x="113" y="1" width="16" height="148"/>
+                                    <rect key="frame" x="113" y="1" width="16" height="512"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jd6-Ms-AnM">
+                            <button toolTip="Clear queue." verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jd6-Ms-AnM">
                                 <rect key="frame" x="105" y="533" width="20" height="22"/>
                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressFreestandingTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="seC-oM-TJ4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -341,17 +340,17 @@
                     </customView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Ur3-KM-q02" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="5OC-In-d0h"/>
-                    <constraint firstAttribute="bottom" secondItem="N06-q6-jqD" secondAttribute="bottom" id="81x-9L-blg"/>
-                    <constraint firstAttribute="bottom" secondItem="Ga3-t2-jZL" secondAttribute="bottom" id="Hvq-mj-kQ1"/>
-                    <constraint firstItem="Ur3-KM-q02" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="NeQ-Sd-I9s"/>
-                    <constraint firstAttribute="trailing" secondItem="Ga3-t2-jZL" secondAttribute="trailing" id="SHn-Gv-AaH"/>
-                    <constraint firstItem="Ga3-t2-jZL" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="YJr-L7-Jfu"/>
-                    <constraint firstItem="FyT-ip-hIO" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="a8X-Hb-Xwg"/>
-                    <constraint firstItem="Ga3-t2-jZL" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="gVk-9S-5jl"/>
-                    <constraint firstItem="N06-q6-jqD" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="hYX-2A-Iu2"/>
-                    <constraint firstAttribute="trailing" secondItem="FyT-ip-hIO" secondAttribute="trailing" id="sFN-eK-Zkg"/>
-                    <constraint firstItem="N06-q6-jqD" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="z5G-Wj-Htb"/>
+                    <constraint firstAttribute="trailing" secondItem="FyT-ip-hIO" secondAttribute="trailing" id="3b6-Mg-nHE"/>
+                    <constraint firstItem="N06-q6-jqD" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="4X6-CN-qYz"/>
+                    <constraint firstItem="FyT-ip-hIO" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="8Cp-87-0y9"/>
+                    <constraint firstItem="Ur3-KM-q02" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="HYM-iT-EPO"/>
+                    <constraint firstItem="Ur3-KM-q02" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="Pit-TO-JuA"/>
+                    <constraint firstAttribute="bottom" secondItem="Ga3-t2-jZL" secondAttribute="bottom" id="QCp-RS-LL5"/>
+                    <constraint firstItem="Ga3-t2-jZL" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="UIU-ZD-vvb"/>
+                    <constraint firstAttribute="bottom" secondItem="N06-q6-jqD" secondAttribute="bottom" id="fdA-OI-m0u"/>
+                    <constraint firstItem="N06-q6-jqD" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="qKm-qN-TBn"/>
+                    <constraint firstAttribute="trailing" secondItem="Ga3-t2-jZL" secondAttribute="trailing" id="qVO-Z0-ual"/>
+                    <constraint firstItem="Ga3-t2-jZL" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="vp5-5h-g9B"/>
                 </constraints>
             </view>
             <connections>

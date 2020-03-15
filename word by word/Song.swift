@@ -16,6 +16,7 @@ class Song : NSObject, Codable, NSPasteboardWriting, NSPasteboardReading {
     var title = ""
     var artists:[String] = []
     var lyrics:[Array<String>] = []
+    var translatedLyrics:[String] = []
     
     var timing:[Array<CGFloat>] = []
     var songLength:CGFloat = 0
@@ -64,6 +65,7 @@ class Song : NSObject, Codable, NSPasteboardWriting, NSPasteboardReading {
         self.fontComponents = dict["fontComponents"] as! [CGFloat]
         self.alternateFontComponents = dict["alternateFontComponents"] as? [CGFloat]
         self.timing = dict["timing"] as! [Array<CGFloat>]
+        self.translatedLyrics = dict["translatedLyrics"] as! [String]
     }
     
     func writingOptions(forType type: NSPasteboard.PasteboardType, pasteboard: NSPasteboard) -> NSPasteboard.WritingOptions {

@@ -163,7 +163,7 @@ class TimingViewController: NSViewController {
         AppDelegate.collectionBank = collectionBank
         
         //refresh data in case search window is open
-        (AppDelegate.mainWindow!.windowController! as! HomeWindowController).searchViewController.collectionView?.reloadData()
+        (AppDelegate.mainWindow!.windowController! as! HomeWindowController).searchViewController.onSearch((AppDelegate.mainWindow!.windowController! as! HomeWindowController).searchViewController.searchField)
         
         //close window
         view.window!.performClose(self)

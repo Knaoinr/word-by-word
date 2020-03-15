@@ -30,6 +30,7 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var songLengthLabel: NSTextField!
     @IBOutlet weak var firstLyricLabel: NSTextField!
     @IBOutlet weak var lyricsTextView: NSTextView!
+    @IBOutlet weak var translatedLyricsTextView: NSTextView!
     @IBOutlet weak var songMinute: NSTextField!
     @IBOutlet weak var songSecond: NSTextField!
     @IBOutlet weak var firstMinute: NSTextField!
@@ -80,7 +81,8 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         }
         colorView.changeGradientColor(start: song.topGradientColor, end: song.bottomGradientColor)
         letter.textColor = song.fontColor
-        lyricsTextView.string = convertToOneBigString(song.lyrics)
+        lyricsTextView.string = convertFromTwoDimensionsToString(song.lyrics)
+        translatedLyricsTextView.string = convertFromOneDimensionToString(song.translatedLyrics)
         songMinute.stringValue = "\(floor(song.songLength/60))"
         songSecond.stringValue = "\(song.songLength.truncatingRemainder(dividingBy: 60))"
         firstMinute.stringValue = "\(floor(song.firstLyric/60))"
@@ -128,7 +130,7 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         
         //erase timing & save dangerous values if different (no allowance >:()
         if didChange {
-            if lyricsTextView.string != convertToOneBigString(song.lyrics) || songMinute.stringValue != "\(floor(song.songLength/60))" || songSecond.stringValue != "\(song.songLength.truncatingRemainder(dividingBy: 60))" || firstMinute.stringValue != "\(floor(song.firstLyric/60))" || firstSecond.stringValue != "\(song.firstLyric.truncatingRemainder(dividingBy: 60))" {
+            if lyricsTextView.string != convertFromTwoDimensionsToString(song.lyrics) || songMinute.stringValue != "\(floor(song.songLength/60))" || songSecond.stringValue != "\(song.songLength.truncatingRemainder(dividingBy: 60))" || firstMinute.stringValue != "\(floor(song.firstLyric/60))" || firstSecond.stringValue != "\(song.firstLyric.truncatingRemainder(dividingBy: 60))" {
                 //set values
                 //1. lyrics
                 let everyLineBreakIsN = lyricsTextView.string.replacingOccurrences(of: "\r", with: "\n")
@@ -162,6 +164,12 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
         newSong!.bottomGradientColor = bottomGradientColorWell.color
         newSong!.fontColor = fontColorWell.color
         newSong!.alternateFontColor = alternateColorWell.color
+        newSong!.translatedLyrics = []
+        let everyLineBreakIsN = translatedLyricsTextView.string.replacingOccurrences(of: "\r", with: "\n")
+        let lineArray = everyLineBreakIsN.split(separator: "\n")
+        for x in 0...lineArray.count-1 {
+            newSong!.translatedLyrics.append(String(lineArray[x]))
+        }
         
         //actually save
         //Save song
@@ -202,24 +210,20 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     @IBAction func delete(_ sender: NSButton) {
         //delete song from song bank
         var songBank = AppDelegate.songBank
-        //make sure deletes only one
-        var hasRemoved = false
-        songBank.removeAll { (testSong) -> Bool in
-            if testSong.title == song.title && testSong.artists.count == song.artists.count && !hasRemoved {
+        let index = songBank.firstIndex { (testSong) -> Bool in
+            if testSong.title == song.title && testSong.artists.count == song.artists.count {
                 var matching = true
                 for index in 0...testSong.artists.count-1 {
                     if testSong.artists[index] != song.artists[index] {
                         matching = false
                     }
                 }
-                if matching {
-                    hasRemoved = true
-                }
                 return matching
             } else {
                 return false
             }
         }
+        songBank.remove(at: index!)
         AppDelegate.songBank = songBank
         
         //and collections
@@ -313,7 +317,7 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     
     // MARK: - Homemade methods
     
-    func convertToOneBigString(_ array: [Array<String>]) -> String {
+    func convertFromTwoDimensionsToString(_ array: [Array<String>]) -> String {
         var result = ""
         
         for x in 0...array.count-1 {
@@ -324,6 +328,25 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
                     result += " "
                 }
             }
+            //for every line, add newline if not last
+            if x != array.count-1 {
+                result += "\n"
+            }
+        }
+        
+        return result
+    }
+    
+    func convertFromOneDimensionToString(_ array: [String]) -> String {
+        var result = ""
+        
+        if array.count == 0 {
+            return result
+        }
+        
+        for x in 0...array.count-1 {
+            //add line
+            result += array[x]
             //for every line, add newline if not last
             if x != array.count-1 {
                 result += "\n"
