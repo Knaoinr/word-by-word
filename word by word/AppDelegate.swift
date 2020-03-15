@@ -44,6 +44,71 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         mainWindowController.searchViewController.view.setFrameSize(NSSize(width: AppDelegate.mainWindow!.frame.width - 5, height: AppDelegate.mainWindow!.frame.height - 25))
     }
     
+    // MARK: - Menu bar
+    
+    //File>New
+    @IBAction func newSong(_ sender: NSMenuItem) {
+        mainWindowController.onAddButtonPress(sender)
+    }
+    
+    //File>Open...
+    @IBAction func openFile(_ sender: NSMenuItem) {
+        let dialog = NSOpenPanel()
+        
+        dialog.canChooseDirectories = true
+        dialog.canCreateDirectories = true
+        dialog.allowsMultipleSelection = true
+        dialog.allowedFileTypes = ["txt"]
+
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            for url in dialog.urls {
+                //decode each file
+                do {
+                    let jsonString = try String(contentsOf: url)
+                    let jsonData = jsonString.data(using: .utf8)!
+                    let newSongBank = try JSONDecoder().decode([Song].self, from: jsonData)
+                    for song in newSongBank {
+                        AppDelegate.songBank.append(song)
+                    }
+                } catch {
+                    print("AppDelegate.openFile: Could not convert to [Song]")
+                }
+            }
+        } else {
+            // User clicked on "Cancel"
+            return
+        }
+    }
+    
+    //File>Export...
+    @IBAction func exportAs(_ sender: NSMenuItem) {
+        let dialog = NSSavePanel()
+        
+        dialog.message = "Choose where to place your file containing all songs selected..."
+        dialog.allowedFileTypes = ["txt"]
+        dialog.allowsOtherFileTypes = false
+
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
+            //find selected songs
+            var selectedSongs:[Song] = []
+            for path in mainWindowController.searchViewController.collectionView.selectionIndexPaths {
+                selectedSongs.append((mainWindowController.searchViewController.collectionView.item(at: path) as! SearchCollectionViewItem).song)
+            }
+            
+            //write to chosen place
+            do {
+                let jsonData = try JSONEncoder().encode(selectedSongs)
+                let jsonString = String(data: jsonData, encoding: .utf8)!
+                try jsonString.write(to: dialog.url!, atomically: true, encoding: .utf8)
+            } catch {
+                print("???")
+            }
+        } else {
+            // User clicked on "Cancel"
+            return
+        }
+    }
+    
     // MARK: - Data
 
     func reloadSavedData() {

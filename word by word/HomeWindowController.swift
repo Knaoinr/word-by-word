@@ -68,7 +68,7 @@ class HomeWindowController: NSWindowController {
         //TODO: browse
     }
     
-    @IBAction func onAddButtonPress(_ sender: NSButton) {
+    @IBAction func onAddButtonPress(_ sender: Any) {
         let addWindowController = AddWindowController(windowNibName: "AddWindowController")
         addWindowArray.append(addWindowController)
         addWindowController.window?.makeKeyAndOrderFront(self)

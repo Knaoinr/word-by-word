@@ -202,13 +202,18 @@ class EditingWindowController: NSWindowController, NSWindowDelegate {
     @IBAction func delete(_ sender: NSButton) {
         //delete song from song bank
         var songBank = AppDelegate.songBank
+        //make sure deletes only one
+        var hasRemoved = false
         songBank.removeAll { (testSong) -> Bool in
-            if testSong.title == song.title && testSong.artists.count == song.artists.count {
+            if testSong.title == song.title && testSong.artists.count == song.artists.count && !hasRemoved {
                 var matching = true
                 for index in 0...testSong.artists.count-1 {
                     if testSong.artists[index] != song.artists[index] {
                         matching = false
                     }
+                }
+                if matching {
+                    hasRemoved = true
                 }
                 return matching
             } else {
